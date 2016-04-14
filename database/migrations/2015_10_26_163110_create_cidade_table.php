@@ -17,6 +17,7 @@ class CreateCidadeTable extends Migration
             $table->string('nome');
             $table->integer('idEstado')->unsigned();
             $table->foreign('idEstado')->references('id')->on('estado');
+            $table->timestamps();
         });
     }
 

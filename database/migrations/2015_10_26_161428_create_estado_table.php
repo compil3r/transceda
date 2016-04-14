@@ -16,6 +16,7 @@ class CreateEstadoTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('uf');
+            $table->timestamps();
         });
 
     }

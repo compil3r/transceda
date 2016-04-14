@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 portfolio-item">
-                    <a href="#portfolioModal1" class="portfolio-link">
+                    <a  data-toggle="modal" data-target="#modalDoar" class="portfolio-link">
                         <div class="caption">
                             <div class="caption-content">
                                 <h2>REALIZAR UMA DOAÇÃO!</h2>
@@ -99,7 +99,7 @@
                 </div></div>
             </div>
         </section>
-
+@include('partials.modalDoar');
         <!-- Contact Section -->
         <section id="contact">
             <div class="container">

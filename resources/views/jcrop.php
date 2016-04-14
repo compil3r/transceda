@@ -27,9 +27,10 @@
 	<div class="container ">
 		<div class="row">
 			<div class="col-lg-12 text-center">
-				<h1>Corte sua foto de perfil!</h1>
-
-				<hr class="star-light">
+				<h2>Quase la...</h2>
+			    <hr class="star-light">
+				<h4>Antes disso, corte sua foto de perfil!</h4>
+	
 			</div>
 		</div>
 		<div class="row">

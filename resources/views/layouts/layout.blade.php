@@ -34,6 +34,7 @@
     <body id="page-top" class="index">
 
         <!-- Navigation -->
+        <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,19 +52,16 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="hidden">
-                            <a href="#page-top"></a>
+                            <a href="/"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="index.php">Inicio</a>
+                            <a href="/">Inicio</a>
                         </li>
                         <li class="page-scroll">
                             <a href="#about">Sobre</a>
                         </li>
-                        <!--li class="page-scroll">
-                            <a href="#contact"></a>
-                        </li-->
                         <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Historias <span class="caret"></span></a>
+                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Historias <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="#">Adicionar</a></li>
                             <li><a href="#">Conhecer</a></li>
@@ -72,19 +70,33 @@
                             <li><a href="#">Separated link</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#">One more separated link</a></li-->
-                        </ul>
-                    </li>
-                </ul>
+                            </ul>
+                        </li>
+                    @if (Auth::guest())
+                        <li class="dropdown">
+                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="/login">Entrar</a></li>
+                            <li><a href="/register">Registrar</a></li>
+                            
+                            </ul>
+                        </li>
+                      @else
+                        <li>
+                            <a href="/logout">Sair</a>
+                        </li>
+                      @endif    
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
+            <!-- /.container-fluid -->
+        </nav>
 
-@section('conteudo')
+        @section('conteudo')
 
 
-@show
+        @show
 
 
         <!-- Footer -->
@@ -92,7 +104,7 @@
             <div class="footer-above">
                 <div class="container">
                     <div class="row">
-                     
+
                         <div class="footer-col col-md-4">
                             <h3>Acompanhe</h3>
                             <ul class="list-inline">
@@ -140,10 +152,14 @@
 
 
     <!-- jQuery -->
+
     <script src="/js/jquery.js"></script>
-    <script src="/js/jquery.mask.min.js"></script>
+    @section('jquery')
+    @show
     <!-- Bootstrap Core JavaScript -->
+
     <script src="/js/bootstrap.min.js"></script>
+
 
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
@@ -152,13 +168,12 @@
 
     <!-- Contact Form JavaScript -->
     <script src="/js/jqBootstrapValidation.js"></script>
-<!--    <script src="js/contact_me.js"></script> -->
-
-    
+    <!--    <script src="js/contact_me.js"></script> -->
     <script src="/js/freelancer.js"></script>
-@section('script')
+    
+    @section('script')
 
-@show
+    @show
 </body>
 
 </html>
