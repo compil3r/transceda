@@ -517,7 +517,8 @@ footer .footer-below {
 }
 
 .ft {
-    margin-top: 25px;
+    margin-top: 6px;
+    margin-bottom: -5px !important;
 }
 
 .btn-success:hover{
@@ -547,4 +548,25 @@ footer .footer-below {
     margin-top: -4px;
     color:  #7073ce;
     
+}
+
+#contar {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+.form-group {
+    margin-bottom: 5px;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+.form-control {
+    border-radius: 0px;
+}
+
+output {
+    text-align: center;
+    list-style-type: none;
 }

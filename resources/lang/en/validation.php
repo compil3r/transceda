@@ -108,6 +108,7 @@ return [
     'email' => 'E-mail',
     'password' => 'Password',
     'login' => 'Login',
+    'name' => 'Nome'
     'remember' => 'Remember Password',
     'forgotpassword' => 'I forgot the password.',
 ],
