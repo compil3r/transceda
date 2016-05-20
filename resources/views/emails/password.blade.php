@@ -1,1 +1,4 @@
-Click here to reset your password: {{ url('password/reset/'.$token) }}
+Ola, fulano.
+
+Voce solicitou a troca de senhas, click nesse link para executar. 
+{{ url('password/reset/'.$token) }}

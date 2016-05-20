@@ -3,6 +3,25 @@
  * Code licensed under the Apache License v2.0.
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
+@font-face {
+    font-family: 'NexaFreeBoldwebfont';
+    src: url('../fonts/NexaFreeBoldwebfont.eot');
+    src: local('NexaFreeBoldwebfont'), url('../fonts/NexaFreeBoldwebfont.woff') format('woff'), url('../fonts/NexaFreeBoldwebfont.ttf') format('truetype');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_1414">Text with this font applied</p> */
+.nexa-bold {
+    font-family: 'NexaFreeBoldwebfont' !important;
+}
+
+@font-face {
+    font-family: 'NexaFreeLightwebfont';
+    src: url('../fonts/NexaFreeLightwebfont.eot');
+    src: local('NexaFreeLightwebfont'), url('../fonts/NexaFreeLightwebfont.woff') format('woff'), url('../fonts/NexaFreeLightwebfont.ttf') format('truetype');
+}
+/* use this class to attach this font to any element i.e. <p class="fontsforweb_fontid_1517">Text with this font applied</p> */
+.nexa-light {
+    font-family: 'NexaFreeLightwebfont' !important;
+}
 
 body {
     overflow-x: hidden;
@@ -22,7 +41,7 @@ a:focus,
 a:active,
 a.active {
     outline: 0;
-    color: #7073ce;
+    color: #217dbb;
 }
 
 h1,
@@ -30,9 +49,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+h6 { 
+    font-family: 'NexaFreeLightwebfont' !important;
     font-weight: 700;
 }
 
@@ -63,7 +81,7 @@ hr.star-light {
 
 hr.star-light:after {
     color: #fff;
-    background-color: #7073ce;
+    background-color: #217dbb;
 }
 
 hr.star-primary {
@@ -82,7 +100,7 @@ hr.star-primary:after {
 header {
     text-align: center;
     color: #fff;
-    background: #7073ce;
+    background: #217dbb;
 }
 
 header .container {
@@ -96,11 +114,15 @@ header img {
 }
 
 header .intro-text .name {
-    display: block;
+
     /*text-transform: uppercase;*/
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 2em;
     font-weight: 700;
+}
+
+header .margin {
+    margin-top: -10px;
 }
 
 header .intro-text .skills {
@@ -115,7 +137,8 @@ header .intro-text .skills {
     }
 
     header .intro-text .name {
-        font-size: 4.75em;
+        margin-top: -3px;
+        font-size: 4em;
     }
 
     header .intro-text .skills {
@@ -148,8 +171,7 @@ header .intro-text .skills {
 }
 
 .navbar {
-    text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-family: 'NexaFreeLightwebfont' !important;
     font-weight: 700;
 }
 
@@ -167,7 +189,7 @@ header .intro-text .skills {
 
 .navbar-default,
 .navbar-inverse {
-    background-color: #d87fae;
+    background-color: #E97C95;
     border: 0;
 }
 
@@ -182,7 +204,7 @@ section h2 {
 
 section.success {
     color: #fff;
-    background: #7073ce;
+    background: #217dbb;
 }
 
 section.success a,
@@ -233,7 +255,7 @@ section.success a.active {
 
 #portfolio .portfolio-item .portfolio-link .caption .caption-content {
     position: absolute;
-    top: 20%;
+    top: 45% !important;
     width: 100%;
     height: 20px;
     margin-top: -12px;
@@ -285,7 +307,7 @@ section.success a.active {
 .btn-outline:active,
 .btn-outline.active {
     border: solid 2px #fff;
-    color: #7073ce; /*aqui*/
+    color: #217dbb; /*aqui*/
     background: #fff;
 }
 
@@ -527,7 +549,7 @@ footer .footer-below {
 }
 
 .corte {
-    background-color:#7073ce;
+    background-color:#217dbb;
     text-align: center;
     color: #fff;
 }
@@ -538,15 +560,14 @@ footer .footer-below {
 }
 
 .perfil {
-    float:left;
-    margin-right: 8px;
+    margin-bottom: 8px;
     height: 300px;
     width: 300px;
 }
 
 .nome{
     margin-top: -4px;
-    color:  #7073ce;
+    color:  #217dbb;
     
 }
 
@@ -569,4 +590,25 @@ footer .footer-below {
 output {
     text-align: center;
     list-style-type: none;
+}
+
+.img-menu {
+    width: 40px;
+    height: 40px;
+    margin-top: -10px;
+}
+
+.center {
+    text-align: center;
+}
+
+.descricao {
+    text-align: justify;
+    font-size: 15px;
+}
+
+.t {
+    font-size: 10em;
+    font-weight: 700;
+
 }

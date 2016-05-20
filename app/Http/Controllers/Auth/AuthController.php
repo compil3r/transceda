@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+
 
 class AuthController extends Controller
 {
@@ -45,6 +52,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'cpf' => 'required|unique:users',
         ]);
     }
 
@@ -54,14 +62,29 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    private function create(array $data)
     {
+        if (Input::file('imagem')) {
+            $imagem = Input::file('imagem');
+            $name = $imagem->getClientOriginalName();
+            $imagem->move(public_path().'/imagem/', $name);
+        } else {
+            $name = "no-image";
+        }
+       
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'idCidade' => '80',
-            'idEstado' => '17',
+            'idCidade' => $data['cidade'],
+            'idEstado' => $data['estado'],
+            'cpf' => $data['cpf'],
+            'imagem' => $name,
+            'aniversario' => $data['nascimento'],
+
         ]);
+
+         
     }
 }

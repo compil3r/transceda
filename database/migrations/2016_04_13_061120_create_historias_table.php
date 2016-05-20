@@ -19,6 +19,7 @@ class CreateHistoriasTable extends Migration
             $table->string('titulo');
             $table->string('finalidade');
             $table->string('meta');
+            $table->string('imagem');
             $table->longText('descricao');
             $table->timestamps();
         });

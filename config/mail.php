@@ -1,6 +1,6 @@
 <?php
 
-return [
+return [ 
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'email@dominio.com', 'name' => 'Transcenda'],
+    'from' => ['address' => 'transcenda@transcenda.com', 'name' => 'Transcenda'],
 
     /*
     |--------------------------------------------------------------------------

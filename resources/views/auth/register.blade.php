@@ -16,7 +16,13 @@
                     <strong>Opa!</strong> Parece que nós temos alguns erros.<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
+                        <li> 
+                            @if($error)
+                            {{$error->first('unique')}} Esqueceu sua senha?
+                            @else
+                            {{$error}} 
+                            @endif
+                        </li>
                         @endforeach
                     </ul>
                 </div>
@@ -25,8 +31,9 @@
         </div>
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
-                <form class="form" role="form" method="POST" action="/register">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <form enctype="multipart/form-data" class="form" role="form" method="POST" action="/register" >
+                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+
                     <div class="row control-group">
                         <div class="form-group col-xs-12">
                             <label> Nome: </label>
@@ -36,7 +43,7 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-6">
                             <label> CPF: </label>
-                            <input type="text" class="form-control" name="cpf">                        
+                            <input type="text" id="cpf" class="form-control" name="cpf">                        
                         </div>
                         <div class="form-group col-xs-6">
                             <label> Nascimento: </label>
@@ -69,11 +76,11 @@
                     <div class="row control-group">
                         <div class="form-group col-xs-6">
                             <label>Senha:</label>
-                            <input type="password" class="form-control" name="senha">
+                            <input type="password" class="form-control" name="password">
                         </div>
                         <div class="form-group col-xs-6">
                             <label>Confirme a senha:</label>
-                            <input type="password" class="form-control" name="senha">
+                            <input type="password" class="form-control" name="password_confirmation">
                         </div>
                     </div>
                     <div class="row control-group">

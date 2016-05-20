@@ -9,10 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="shortcut icon" href="/img/icone.png" type="image/x-icon">
+     <meta name="csrf-token" content="{{{ Session::token() }}}">
     <title>Projeto [Trans]cenda - @yield('titulo')</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/t.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="/css/transcenda.css" rel="stylesheet">
@@ -45,7 +46,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">[Trans]cenda</a>
+                    <a class="navbar-brand" href="/"><span class="nexa-light">projeto</span><span class="nexa-bold">transcenda</span></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -55,62 +56,55 @@
                             <a href="/"></a>
                         </li>
                         <li class="page-scroll">
-                            <a href="/">Inicio</a>
+                            <a href="/">INICIO</a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#about">Sobre</a>
+                            <a href="#about">SOBRE</a>
                         </li>
+                        @if (Auth::guest())
                         <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Historias <span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="#">Adicionar</a></li>
-                            <li><a href="#">Conhecer</a></li>
-                            <!-- li><a href="#">Something else here</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="#">One more separated link</a></li-->
-                            </ul>
-                        </li>
-                    @if (Auth::guest())
-                        <li class="dropdown">
-                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login <span class="caret"></span></a>
+                          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">LOGIN <span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="/login">Entrar</a></li>
                             <li><a href="/register">Registrar</a></li>
                             
-                            </ul>
-                        </li>
-                      @else
-                        <li>
-                            <a href="/logout">Sair</a>
-                        </li>
-                      @endif    
+                        </ul>
+                    </li>
+                    @else
+                    <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="imagem/{{Auth::user()->imagem}}" class="img-menu img-circle"> <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="/logout">Sair</a></li>
+                        <li><a href="/register">Editar</a></li>
+
                     </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
+                </li>
+                @endif    
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
 
-        @section('conteudo')
+@section('conteudo')
 
 
-        @show
+@show
 
 
-        <!-- Footer -->
-        <footer class="text-center">
-            <div class="footer-above">
-                <div class="container">
-                    <div class="row">
+<!-- Footer -->
+<footer class="text-center">
+    <div class="footer-above">
+        <div class="container">
+            <div class="row">
 
-                        <div class="footer-col col-md-4">
-                            <h3>Acompanhe</h3>
-                            <ul class="list-inline">
-                                <li>
-                                    <a href="https://www.facebook.com/profile.php?id=1601011946807805&ref=ts&fref=ts" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
-                                </li>
+                <div class="footer-col col-md-4">
+                    <h3>Acompanhe</h3>
+                    <ul class="list-inline">
+                        <li>
+                            <a href="https://www.facebook.com/profile.php?id=1601011946807805&ref=ts&fref=ts" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
+                        </li>
                            <!--  <li>
                                 <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-google-plus"></i></a>
                             </li> -->
@@ -158,11 +152,11 @@
     @show
     <!-- Bootstrap Core JavaScript -->
 
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/t.min.js"></script>
 
 
     <!-- Plugin JavaScript -->
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <!-- script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script -->
     <script src="/js/classie.js"></script>
     <!--<script src="js/cbpAnimatedHeader.js"></script>-->
 

@@ -6,7 +6,7 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/jquery.Jcrop.min.css" />
 	<link rel="stylesheet" href="css/transcenda.css" />
-	<link rel="stylesheet" href="css/bootstrap.css"/>
+	<link rel="stylesheet" href="css/t.css"/>
 	<!-- Custom Fonts -->
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">

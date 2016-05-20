@@ -62,11 +62,7 @@ $('.navbar-collapse ul li a').click(function() {
   }
 
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-$("#historia").focus(function(){
-	document.getElementById('msg').innerHTML='Conte sobre sua historia. Este texto será sua descrição!';
-});
-
+  
 $("#confirme").blur(function(){
 	if ($("#senha").val()!=$("#confirme").val()){
 		document.getElementById('s').innerHTML='Senhas precisam ser iguais!';

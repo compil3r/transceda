@@ -7,11 +7,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="img/t.png" alt="">
-                    <div class="intro-text">
-                        <span class="name">transcenda</span>
+                    <span class="t nexa-light">[t]</span>
+                    <div class="intro-text margin">
+                        <span class="name"><span class="nexa-light">projeto</span><span class="nexa-bold">transcenda</span></span>
                         <hr class="star-light">
-                        <span class="skills">1.Passar alem de; <br> 2.Elevar-se acime de;  <br>3.Exceder.</span> <br><span>Definição de <i>Transceda</i> do Aurélio</span>
+                        <span class="skills nexa-light">1. Passar além de; <br> 2. Elevar-se acime de;  <br>3. Exceder.</span> <br><span class="nexa-light">Definição de <span class="nexa-bold">Transcenda</span> do Aurélio</span>
                     </div>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>O que você quer?</h2>
+                    <h2 class="nexa-light">O QUE VOCE QUER?</h2>
                     <hr class="star-primary">
                 </div>
             </div>
@@ -32,7 +32,7 @@
                     <a  data-toggle="modal" data-target="#modalDoar" class="portfolio-link">
                         <div class="caption">
                             <div class="caption-content">
-                                <h2>REALIZAR UMA DOAÇÃO!</h2>
+                                <h2 class="nexa-bold">DOAR</h2>
                             </div>
                         </div>
                         <img src="img/btnDoar.png" class="img-responsive" alt="">
@@ -42,7 +42,7 @@
                     <a href="/cadastrar-historia" class="portfolio-link">
                         <div class="caption">
                             <div class="caption-content">
-                                <h2>CONTAR SUA HISTÓRIA!</h2>
+                                <h2 class="nexa-bold">PUBLICAR</h2>
                             </div>
                         </div>
                         <img src="img/btnContar.png" class="img-responsive" alt="">
@@ -59,7 +59,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Últimas Histórias</h2>
+                    <h2>ÚLTIMAS HISTÓRIAS</h2>
                     <hr class="star-light">
                 </div>
             </div>
@@ -77,8 +77,8 @@
                             <div class="item">
                             @endif
                                 <img src="imagem/{{$historia->imagem}}" class="img-profile img-responsive img-circle">
-                                <p><h3>{{$historia->nomeSocial}}</h3></p>
-                                <p>{{$historia->descricao}}</p>
+                                <p><h3>{{$historia->autor->name}}</h3></p>
+                                <p>{{substr($historia->descricao, 0, 350)}}...</p>
                                 <a href="/perfil/{{$historia->id}}" class="btn  btn-lg btn-outline">REALIZAR DOAÇÃO</a>
                             </div>
                             <?php $num++; ?>
@@ -99,13 +99,13 @@
                 </div></div>
             </div>
         </section>
-@include('partials.modalDoar');
+
         <!-- Contact Section -->
         <section id="contact">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12 text-center">
-                        <h2>Alguns Números</h2>
+                        <h2>DADOS IMPORTANTES</h2>
                         <hr class="star-primary">
                     </div>
                 </div>

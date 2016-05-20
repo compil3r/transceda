@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/home', 'TranscedaController@index');
 Route::get('/', 'TranscedaController@index');
-Route::get('cadastrar-historia', 'HistoriasController@create' );
 Route::post('/enviar', 'HistoriasController@store' );
 Route::get('jcrop', function()
 {
@@ -25,7 +24,7 @@ Route::get('jcrop', function()
 Route::post('jcrop', 'HistoriasController@imagem');
 Route::get('/cidades/{id_estado}', 'HistoriasController@getCidades');
 
-Route::get('perfil/{id_historia}', 'HistoriasController@teste');
+Route::get('perfil/{id_historia}', 'HistoriasController@show');
 
 // Login e Logout routes...
 Route::get('login', ['as' =>'login', 'uses' => 'Auth\AuthController@getLogin']);
@@ -43,3 +42,16 @@ Route::post('forgot', ['as' =>'password/email', 'uses' => 'Auth\PasswordControll
 // Password reset routes...
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
+
+// Verifica se o usuário está logado
+Route::group(['middleware' => 'auth'], function()
+{
+ Route::get('cadastrar-historia', 'HistoriasController@create');
+});
+
+
+//PagSeguro
+
+Route::post('pagar', 'DoacoesController@doar');
+
+Route::get('pagar/info', 'DoacoesController@info');

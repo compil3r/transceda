@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class HistoriasController extends Controller
 {
@@ -21,22 +22,16 @@ class HistoriasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
-    public function teste($id_historia)
-    {
-        $historia = Historias::find($id_historia);
-        return view('transcenda.historias.perfil', compact('historia'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
+        /**
+     * Get a validator for an incoming registration request.
+    *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-      return view('transcenda.historias.cadastrar', array('estados'=>Estados::all()));
+        
+            return view('transcenda.historias.cadastrar', array('estados'=>Estados::all()));
+      
     }
 
     /**
@@ -47,47 +42,37 @@ class HistoriasController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'idUser' => 'required|unique:historias',
   
+        ]);
 
-        $imagem = $request->file('imagem');
-        $name= $imagem->getClientOriginalName();
+          if ($validator->fails()) {
+             return Redirect::to('cadastrar-historia')->withErrors($validator)->with('message', 'oi');
+        }
+        if (Input::file('imagem')) {
+            $imagem = $request->file('imagem');
+            $name= $imagem->getClientOriginalName();
+        } else {
+            $name = '0';
+        }
+
         
-
-
-        $usuario = new User();
-        $usuario->name = $request->get('nome');
-        $usuario->email = $request->get('email');
-        $usuario->cpf = $request->get('cpf');
-        $usuario->password = bcrypt($request->get('senha'));
-
-        $usuario->save();
-
-        $id = $usuario->id;
-
-       
         $historia = new Historias();
-        $historia->idUser = $id;
-        $historia->nomeSocial = $request->get('nomeSocial');
-        $historia->aniversario = $request->get('nascimento');
-        $historia->endereco = $request->get('endereco');
-        $historia->bairro = $request->get('bairro');
-        $historia->cep = $request->get('cep');
-        $historia->idEstado = $request->get('estado');
-        $historia->idCidade = $request->get('cidade');
+        $historia->idUser = $request->get('idUser');
         $historia->meta = $request->get('meta');
-        $historia->objetivo = $request->get('objetivo');
+        $historia->finalidade = $request->get('objetivo');
         $historia->descricao = $request->get('historia');
         $historia->imagem = $name;
-
         $historia->save();
-
-        
-        if($imagem->move(public_path().'/imagem/', $name)){
-            return Redirect::to('jcrop')->with('imagem', $name);
+        if (Input::file('imagem')) {  
+             if($imagem->move(public_path().'/imagem/', $name)){
+                return Redirect::to('jcrop')->with('imagem', $name);
+            }
         } else {
-            return "Erro!";
+            return Redirect::to('home');
         }
-   
 }
 
     public function imagem() {
@@ -122,7 +107,7 @@ class HistoriasController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id)));
     }
 
     /**

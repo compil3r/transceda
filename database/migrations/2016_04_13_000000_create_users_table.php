@@ -19,9 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('cpf')->unique();
             $table->string('password', 60);
             $table->date('aniversario');
-            $table->string('endereco', 100);
-            $table->string('bairro', 50);
-            $table->string('cep', 50);
             $table->integer('idCidade')->unsigned();
             $table->foreign('idCidade')->references('id')->on('cidade');
             $table->integer('idEstado')->unsigned();

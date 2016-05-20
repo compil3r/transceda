@@ -9,6 +9,6 @@ class Cidades extends Model
     protected $table = 'cidade';
 
     public function estado() {
-    	$this->belongsTo('App\Estados', 'idEstado');
+    	return $this->belongsTo('App\Estados', 'idEstado');
     }
 }
