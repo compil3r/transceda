@@ -1,4 +1,13 @@
 
+var p = document.getElementById("valor"),
+    res1 = document.getElementById("resultado");
+
+p.addEventListener("input", function () {
+    res1.innerHTML = "R$" + p.value;
+}, false);
+
+
+
 $("#cpf").mask("999.999.999-99");
 $("#nascimento").mask("99/99/9999");
 $("#cep").mask("99999-999");

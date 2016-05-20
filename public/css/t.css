@@ -6819,3 +6819,18 @@ a.list-group-item-danger.active:focus {
 .popover {
   color: #2c3e50;
 }
+
+/*
+  PERFIL
+*/
+.contribuicao {
+  text-align: center;
+  padding-top: 42px;
+  color: #E97C95 ;
+  font-size: 6em;
+}
+
+
+/*
+  END PERFIL
+*/

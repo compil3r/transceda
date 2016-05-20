@@ -108,7 +108,7 @@ public function doar(Request $request) {
             'id' => '1',
             'description' => 'Doacao',
             'quantity' => '1',
-            'amount' => '41.15',
+            'amount' => $request->get('valor'),
             'weight' => '0',
             'shippingCost' => '0',
             'width' => '0',
@@ -139,7 +139,7 @@ public function doar(Request $request) {
             ]
         ],
         'phone' => '11985445522',
-        'bornDate' => '1988-03-21',
+        'bornDate' => $request->get('nascimento'),
     ]
 ];
     $facade = new CheckoutFacade();
