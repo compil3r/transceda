@@ -18,9 +18,9 @@
             <div class="col-md-1 col-lg-1 col-sm-1 col-xs-1">R$0</div>
             <div class="col-md-9 col-lg-9 col-sm-9 col-xs-9"><input type="range" id="valor" value="0" name="valor" min="0" max="{{$historia->meta}}"></div>
             <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">R${{$historia->meta}}</div>
-
+            <redirectURL> http://lojamodelo.com.br/notebook-prata-conclusao.html </redirectURL>
             <h1 class="contribuicao" align="center" id="resultado">R$0</h1>
-            <input type="submit">
+            <input class="btn btn-default btn-large btn-block doar" type="submit" value="Contribuir com essa história">
         </form>
         </div>
 

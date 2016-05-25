@@ -2,14 +2,14 @@
 
 return [
     /* DEFINE SE SERÁ UTILIZADO O AMBIENTE DE TESTES */
-    'use-sandbox' => false,
+    'use-sandbox' => true,
 
     /*
      * Coloque abaixo as informações do seu cadastro no PagSeguro
      */
     'credentials' => [//INFORME AS CREDENCIAIS PADRÕES DE SUA LOJA, MAS PORDERÁ SER ALTERADA EM RUNTIME
         'email' => 'vitor@projetotranscenda.com.br',
-        'token' => '9ED42EC90E844435969C946C756EB58B',
+        'token' => '7CF659B3D11148A2BA60B3F7901306DB',
     ],
 
     /*

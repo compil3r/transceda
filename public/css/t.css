@@ -6830,7 +6830,14 @@ a.list-group-item-danger.active:focus {
   font-size: 6em;
 }
 
+.doar {
+  background-color: #E97C95; 
+  border-color: #E97C95;
+}
 
+.doar:hover {
+  background-color: #E97C8C;
+}
 /*
   END PERFIL
 */
