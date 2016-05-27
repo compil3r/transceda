@@ -19,3 +19,4 @@ class Historias extends Model
     
 
 }
+ 

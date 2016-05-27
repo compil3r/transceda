@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
 	    "illuminate/html": "5.0.*@dev",
         "barryvdh/laravel-debugbar": "^2.2",
-        "michael/laravelpagseguro": "dev-master"
+        "pagseguro/php": "@stable",
+        "paypal/rest-api-sdk-php": "^1.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -19,7 +20,7 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database"            
         ],
         "psr-4": {
             "App\\": "app/"

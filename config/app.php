@@ -138,7 +138,6 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Illuminate\Html\HtmlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        laravel\pagseguro\Platform\Laravel5\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -198,7 +197,7 @@ return [
         'Html'      => Illuminate\Html\HtmlFacade::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'PagSeguro' => laravel\pagseguro\Platform\Laravel5\PagSeguro::class
+    
 
     ],
 

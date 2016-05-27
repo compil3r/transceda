@@ -52,6 +52,15 @@ Route::group(['middleware' => 'auth'], function()
 
 //PagSeguro
 
-Route::post('pagar', 'DoacoesController@doar');
+// Enviamos nuestro pedido a PayPal
+Route::post('pagar', array(
+	'as' => 'payment',
+	'uses' => 'PaypalController@postPayment',
+));
+// Después de realizar el pago Paypal redirecciona a esta ruta
+Route::get('payment/status', array(
+	'as' => 'payment.status',
+	'uses' => 'PaypalController@getPaymentStatus',
+));
 
-Route::get('pagar/info', 'DoacoesController@info');
+Route::get('cartao', 'PaypalController@createCC');
