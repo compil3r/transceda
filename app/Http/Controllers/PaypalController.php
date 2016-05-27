@@ -42,6 +42,7 @@ class PaypalController extends Controller
 
 		\Session::put('doador', $request->get('doador'));
 		\Session::put('recebedor', $request->get('recebedor'));
+		\Session::put('valor', $request->get('valor'));
 
 		$addr = new Address();
 		$addr->setLine1('52 N Main ST');
@@ -150,15 +151,12 @@ class PaypalController extends Controller
 			$doacao = new Doacoes();
 			$doacao->idDoador = \Session::get('doador');
 			$doacao->idRecebedor = \Session::get('recebedor');
+			$doacao->valor = \Session::get('valor');
+			$doacao->idHistoria = Historias::where('autor', '=', \Session::get('recebedor'));
+			$doacao->save();
 
-			print_r("transactions");
-			print_r($result->getTransactionDetails());
-			$resultado = $result->getTransactionDetails();
-			print_r("OK TENTATIVA 1");
-			print_r($resultado->amount);
-
-			//return \Redirect::to('home')
-			//	->with('message', 'Compra realizada de forma correcta');
+			return \Redirect::to('perfil/'.$doacao->idHistoria)
+				->with($doacao);
 		}
 		return \Redirect::to('home')
 			->with('message', 'La compra fue cancelada');
