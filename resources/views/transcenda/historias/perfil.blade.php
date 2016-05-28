@@ -14,11 +14,13 @@
 </div>
 <div class="row">
 <div class="col-lg-12 text-center">
-<h3>Meta: R$ {{$historia->meta}}</h3>
-@foreach ($doacoes as $doacao)
-	sera
-@endforeach
+<h3>Meta: R$ {{$historia->meta}} <br> Arrecadado: R$ {{floatval($total)}},00</h3>
 <h4>Finalidade: {{$historia->finalidade}}</h4>
+<div class="progress">
+  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{$total}}" aria-valuemin="0" aria-valuemax="{{$historia->meta}}" style="width: {{$porcentagem}}%">
+    <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>
 </div>
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">

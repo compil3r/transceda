@@ -107,10 +107,19 @@ class HistoriasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::all()));
+    {
+        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id)));
     }
 
+    public function porcentagem($id) {
+         $arrecadado = Doacoes::where('idHistoria', $id)->sum('valor');
+         $total = Historias::find($id)->meta;
+
+         $porcentagem = ($arrecadado*100)/$total;
+
+         return $porcentagem;
+
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -121,7 +130,6 @@ class HistoriasController extends Controller
     {
         //
     }
-
     /**
      * Update the specified resource in storage.
      *
