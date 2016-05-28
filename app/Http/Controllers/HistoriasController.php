@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Historias;
 use App\User;
 use App\Estados;
+use App\Doacoes;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
@@ -106,8 +107,8 @@ class HistoriasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id)));
+    {   
+        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::all()));
     }
 
     /**

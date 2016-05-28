@@ -13,6 +13,7 @@
             <input type="hidden" name="estado" value="{{Auth::user()->cidade->estado->uf}}">
             <input type="hidden" name="doador" value="{{Auth::user()->id}}">
             <input type="hidden" name="recebedor" value="{{$historia->autor->id}}">
+            <input type="hidden" name="historia" value="{{$historia->id}}">
             <input type="hidden" name="cpf" value="{{Auth::user()->cpf}}">
             <input type="hidden" name="email" value="{{Auth::user()->email}}">
             <input type="hidden" name="nascimento" value="{{Auth::user()->aniversario}}">

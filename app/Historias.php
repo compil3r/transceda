@@ -16,6 +16,10 @@ class Historias extends Model
     {
     	return $this->belongsTo('App\User', 'idUser');
     }
+
+    public function doacoes() {
+    	return $this->hasMany('App\Doacoes', 'idHistoria', 'id');
+    }
     
 
 }

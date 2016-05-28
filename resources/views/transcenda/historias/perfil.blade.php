@@ -3,6 +3,9 @@
 <section id="perfil">
 <div class="container">
 <div class="row">
+	@if (Session::has('message'))
+		<div class="alert alert-warning" role="alert">{{Session::get('message')}}</div>
+	@endif
 			<div class="col-lg-12 text-center">
 			<img class="img-responsive perfil" src="/imagem/{{$historia->imagem}}">
 <h2 class="nome">{{$historia->autor->name}}</h2>
@@ -12,6 +15,9 @@
 <div class="row">
 <div class="col-lg-12 text-center">
 <h3>Meta: R$ {{$historia->meta}}</h3>
+@foreach ($doacoes as $doacao)
+	sera
+@endforeach
 <h4>Finalidade: {{$historia->finalidade}}</h4>
 </div>
 <div class="row">
@@ -23,7 +29,7 @@
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
 <h4 class='center'>Andamento das doacoes</h4>
-aqui vai um grafico
+aqui vai um grafico 
   @if (!Auth::guest())
   	@if(Auth::user()->id == $historia->autor->id)
   	editar

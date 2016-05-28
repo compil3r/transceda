@@ -43,6 +43,7 @@ class PaypalController extends Controller
 		\Session::put('doador', $request->get('doador'));
 		\Session::put('recebedor', $request->get('recebedor'));
 		\Session::put('valor', $request->get('valor'));
+		\Session::put('historia', $request->get('historia'));
 
 		$addr = new Address();
 		$addr->setLine1('52 N Main ST');
@@ -152,11 +153,10 @@ class PaypalController extends Controller
 			$doacao->idDoador = \Session::get('doador');
 			$doacao->idRecebedor = \Session::get('recebedor');
 			$doacao->valor = \Session::get('valor');
-			$doacao->idHistoria = Historias::where('autor', '=', \Session::get('recebedor'));
+			$doacao->idHistoria = Session::get('historia');
 			$doacao->save();
 
-			return \Redirect::to('perfil/'.$doacao->idHistoria)
-				->with($doacao);
+			return \Redirect::route('perfil', $doacao->idHistoria)->with('message', 'Sua doação foi processada com sucesso! Obrigado <3');
 		}
 		return \Redirect::to('home')
 			->with('message', 'La compra fue cancelada');

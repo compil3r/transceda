@@ -24,7 +24,7 @@ Route::get('jcrop', function()
 Route::post('jcrop', 'HistoriasController@imagem');
 Route::get('/cidades/{id_estado}', 'HistoriasController@getCidades');
 
-Route::get('perfil/{id_historia}', 'HistoriasController@show');
+Route::get('perfil/{id_historia}', ['as' => 'perfil', 'uses' => 'HistoriasController@show']);
 
 // Login e Logout routes...
 Route::get('login', ['as' =>'login', 'uses' => 'Auth\AuthController@getLogin']);
