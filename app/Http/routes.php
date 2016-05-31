@@ -63,4 +63,6 @@ Route::get('payment/status', array(
 	'uses' => 'PaypalController@getPaymentStatus',
 ));
 
-Route::get('cartao', 'PaypalController@createCC');
+Route::post('comentar', ['as' => 'comentar', 'uses' => 'HistoriasController@comentar']);
+
+Route::get('excluircomentario/{id}', 'HistoriasController@excluirComentario');

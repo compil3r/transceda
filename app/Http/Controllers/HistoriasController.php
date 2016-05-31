@@ -9,6 +9,7 @@ use App\Historias;
 use App\User;
 use App\Estados;
 use App\Doacoes;
+use App\Comentarios;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
@@ -108,10 +109,12 @@ class HistoriasController extends Controller
      */
     public function show($id)
     {
-        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id)));
+        $comentarios = Comentarios::where('idHistoria', $id)->orderBy('created_at', 'asc')->get();
+
+        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id), 'falta' => $this->quantoFalta($id),'comentarios' => $comentarios));
     }
 
-    public function porcentagem($id) {
+    private function porcentagem($id) {
          $arrecadado = Doacoes::where('idHistoria', $id)->sum('valor');
          $total = Historias::find($id)->meta;
 
@@ -119,6 +122,16 @@ class HistoriasController extends Controller
 
          return $porcentagem;
 
+    }
+
+
+    private function quantoFalta($id) {
+         $arrecadado = Doacoes::where('idHistoria', $id)->sum('valor');
+         $total = Historias::find($id)->meta;
+
+         $falta = $total - $arrecadado;
+
+         return $falta;
     }
     /**
      * Show the form for editing the specified resource.
@@ -130,6 +143,9 @@ class HistoriasController extends Controller
     {
         //
     }
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -164,6 +180,25 @@ class HistoriasController extends Controller
         $cidades = $estado->cidades()->getQuery()->get(['id', 'nome']);
         
         return Response::json($cidades);
+    }
+
+    public function comentar(){
+
+        $comentario = new Comentarios();
+        $comentario->idUsuario = Auth::user()->id;
+        $comentario->idHistoria = Input::get('id');
+        $comentario->conteudo = Input::get('comentario');
+
+        $comentario->save();
+        return Redirect::back()->with('message', 'Comentário realizado!');
+    }
+
+
+    public function excluirComentario($id){
+        $comentario = Comentarios::find($id);
+        $comentario->delete();
+
+        return Redirect::back()->with('message', 'Comentário excluido!');
     }
 
 }
