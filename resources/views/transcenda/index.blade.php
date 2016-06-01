@@ -77,8 +77,16 @@
                             <div class="item">
                             @endif
                                 <img src="imagem/{{$historia->imagem}}" class="img-profile img-responsive img-circle">
-                                <p><h3>{{$historia->autor->name}}</h3></p>
-                                <p>{{substr($historia->descricao, 0, 350)}}...</p>
+                                <p><h3>{{$historia->autor->name}} {{$historia->total}}</h3></p>
+                                  <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 col-sm-offset-2 col-sm-8 col-xs-offset-2 col-xs-8">
+                                    <div class="progress">
+                                    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="{{$historia->meta}}" style="width: 10%">
+                                    </div>
+                                    </div>
+                                  </div> 
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                    <p>{{substr($historia->descricao, 0, 350)}}...</p>
+                                </div>    
                                 <a href="/perfil/{{$historia->id}}" class="btn  btn-lg btn-outline">REALIZAR DOAÇÃO</a>
                             </div>
                             <?php $num++; ?>

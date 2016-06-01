@@ -32,8 +32,9 @@
             $retorno .= $horaH - $hora . ' horas atras, ';
             $retorno .= ($minH - $min)*(-1) . ' minutos e ';
             $retorno .= ($segH - $seg) *(-1) . ' segundos';
-        } else {
-        	$retorno = "menos de uma hora atrás";
+        }
+        if ($retorno == null) {
+        	$retorno .= "menos de uma hora atrás";
         }
 
         return $retorno;
@@ -105,13 +106,18 @@ aqui vai um grafico
 			</tr>
 		</thead>
 		<tbody>
+		<?php $i = 0; ?>
 		@foreach ($doacoes as $doacao)
+		@if($i != 3)
+		<?php $i++; ?>
 			<tr>
 				<td>{{$doacao->created_at}}</td>
 				<td>{{$doacao->doador->name}}</td>
 				<td>R$ {{$doacao->valor}},00</td>
 			</tr>
+		@endif
 		@endforeach 
+
 		</tbody>
 	</table>
 </div>
@@ -119,7 +125,8 @@ aqui vai um grafico
 <div class="row">
 <h3>Comentários</h3>
 <hr>
-@if (has($comentarios))
+
+@if (count($comentarios) > 0)
 @foreach ($comentarios as $comentario)
 <div class="media">
   <div class="media-left">
@@ -128,7 +135,7 @@ aqui vai um grafico
   <div class="media-body">
     <h4 class="media-heading">{{$comentario->autor->name}} 
 	    @if (!Auth::guest())
-	  	@if(Auth::user()->id == $historia->autor->id)
+	  	@if(Auth::user()->id == $comentario->autor->id)
 	 		<a class="btn btn-danger btn-sm" href="/excluircomentario/{{$comentario->id}}"><span class="glyphicon glyphicon-trash"></span></a>
 	  		<a class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
 	  	@endif

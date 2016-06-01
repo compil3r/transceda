@@ -156,6 +156,11 @@ class PaypalController extends Controller
 			$doacao->idHistoria = Session::get('historia');
 			$doacao->save();
 
+			$total = \DB::table('historias')->where('id', $doacao->idHistoria)->select('arrecadado')->get();
+			$total = $total + floatval($doacao->valor);
+			\DB::table('historias')->where('id', $doacao->idHistoria)->update(['arrecadado' => $total]);
+
+
 			return \Redirect::route('perfil', $doacao->idHistoria)->with('message', 'Sua doação foi processada com sucesso! Obrigado <3');
 		}
 		return \Redirect::to('home')
