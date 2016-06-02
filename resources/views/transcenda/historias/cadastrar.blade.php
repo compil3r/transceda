@@ -16,6 +16,17 @@
 				
 				</div>
 				@endif
+
+					@if (Auth::user()->tipo == 2)
+					<div class="alert alert-danger">
+					<p align="justify" class="politica">Ops... Infelizmente a nossa politica hoje não permite que você cadastre mais de uma historia por CPF. </p><p align="justify" class="politica"> Isso acontece por que acreditamos que, além da importância do empoderamento pessoal para que a história seja cadastrada é importante que todos/todas tenham a chance de realizar o cadastro.
+					Em breve será possivel cadastrar a história de terceiros, mas enquanto estamos começando esse trabalho é importante que cada um faça por si proprio.
+					</p>
+					<p align="justify" class="politica">A sua história pode ser acessada pelo link: 
+					</p>
+				
+					</div>
+					@endif
 			</div>
 		</div>
 		<div class="row">
@@ -65,7 +76,11 @@
 				<br>
 				<div class="row control-group">
 					<div class="form-group col-xs-12">
+					@if (Auth::user()->tipo == 1)
 						<input type="submit" value="Publicar História" class="btn btn-lg btn-success btn-block"></input>
+					@else 
+						<input type="submit" value="Publicar História" class="btn btn-lg btn-default btn-block" disabled></input>
+					@endif
 					</div>
 				</div>
 			</form>

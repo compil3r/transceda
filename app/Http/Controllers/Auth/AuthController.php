@@ -82,6 +82,7 @@ class AuthController extends Controller
             'cpf' => $data['cpf'],
             'imagem' => $name,
             'aniversario' => $data['nascimento'],
+            'tipo' => 1,
 
         ]);
 

@@ -84,7 +84,7 @@ class PaypalController extends Controller
 
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)
-			->setDescription('Pedido de prueba en mi Laravel App Store');
+			->setDescription("Doação para ".Historias::find($request->get('historia'))->autor->name.", no valor de R$". floatval($request->get('valor'))." reais.");
 
 		$redirect_urls = new RedirectUrls();
 		$redirect_urls->setReturnUrl(\URL::route('payment.status'))
@@ -148,7 +148,7 @@ class PaypalController extends Controller
 		$result = $payment->execute($execution, $this->_api_context);
 		//echo '<pre>';print_r($result);echo '</pre>';exit; // DEBUG RESULT, remove it later
 		if ($result->getState() == 'approved') { // payment made
-			
+
 			$doacao = new Doacoes();
 			$doacao->idDoador = \Session::get('doador');
 			$doacao->idRecebedor = \Session::get('recebedor');
@@ -156,8 +156,13 @@ class PaypalController extends Controller
 			$doacao->idHistoria = Session::get('historia');
 			$doacao->save();
 
-			$total = \DB::table('historias')->where('id', $doacao->idHistoria)->select('arrecadado')->get();
-			$total = $total + floatval($doacao->valor);
+
+			$output = new \Symfony\Component\Console\Output\ConsoleOutput(2);
+
+			$historia = Historias::find($doacao->idHistoria)->arrecadado;
+			$output->writeln($historia);
+			$total = $historia + floatval($doacao->valor);
+			$output->writeln($total);
 			\DB::table('historias')->where('id', $doacao->idHistoria)->update(['arrecadado' => $total]);
 
 

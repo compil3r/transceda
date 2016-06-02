@@ -74,7 +74,6 @@
 <p class="descricao">{{$historia->descricao}}</p>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-''
 <h4 class='center'>Andamento das doacoes</h4>
 aqui vai um grafico 
   @if (!Auth::guest())
@@ -97,6 +96,7 @@ aqui vai um grafico
 <div class="row">
 <h3>Ultimas Doações</h3>
 <hr>
+@if (count($doacoes) > 0)
 	<table class="table table-bordered table-hover">
 		<thead>
 			<tr>
@@ -120,6 +120,9 @@ aqui vai um grafico
 
 		</tbody>
 	</table>
+@else 
+Não há doações. Por que você não ajuda? :)
+@endif
 </div>
 
 <div class="row">

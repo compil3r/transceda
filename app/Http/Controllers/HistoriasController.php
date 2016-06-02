@@ -68,6 +68,9 @@ class HistoriasController extends Controller
         $historia->descricao = $request->get('historia');
         $historia->imagem = $name;
         $historia->save();
+
+        $this->setTipo($historia->idUser);
+
         if (Input::file('imagem')) {  
              if($imagem->move(public_path().'/imagem/', $name)){
                 return Redirect::to('jcrop')->with('imagem', $name);
@@ -167,6 +170,11 @@ class HistoriasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function setTipo($idUser) {
+        \DB::table('users')->where('id', $idUser)->update(array('tipo' => 2));
     }
 
       public function getCidades($id_estado)

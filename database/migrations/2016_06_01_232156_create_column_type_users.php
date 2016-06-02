@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNewColumnHistorias extends Migration
+class CreateColumnTypeUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class CreateNewColumnHistorias extends Migration
      */
     public function up()
     {
-        Schema::table('historias', function($table) {
-            $table->decimal('arrecadado');
+         Schema::table('users', function($table) {
+            $table->integer('tipo');
         });
     }
 
@@ -27,3 +27,4 @@ class CreateNewColumnHistorias extends Migration
         //
     }
 }
+
