@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <div class="col-xs-6 col-xs-offset-3">
                                 <button type="submit" class="btn btn-block btn-primary" style="margin-right: 15px;">{{ trans('validation.attributes.login') }}</button>
-                                <p align="center"><small><small><a href="/forgot">Esqueci minha senha</a></small></small></p>
+                                <p align="center"><small><small><a href="/esqueci-minha-senha">Esqueci minha senha</a></small></small></p>
                             </div>
                         </div>
                     </form>

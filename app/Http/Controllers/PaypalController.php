@@ -166,7 +166,7 @@ class PaypalController extends Controller
 			\DB::table('historias')->where('id', $doacao->idHistoria)->update(['arrecadado' => $total]);
 
 
-			return \Redirect::route('perfil', $doacao->idHistoria)->with('message', 'Sua doação foi processada com sucesso! Obrigado <3');
+			return \Redirect::route('historia', $doacao->idHistoria)->with('message', 'Sua doação foi processada com sucesso! Obrigado <3');
 		}
 		return \Redirect::to('home')
 			->with('message', 'La compra fue cancelada');

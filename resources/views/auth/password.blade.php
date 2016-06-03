@@ -9,7 +9,7 @@
             <div class="col-lg-12 text-center">
                 <h2>Esqueci minha senha</h2>
                 <hr class="star-primary">
-                Calma! Te enviaremos um e-mail com as instrucoes.
+                Calma! Te enviaremos um e-mail com as instruções.
             </div>
  </div>
     <div class="row">
@@ -22,7 +22,7 @@
 
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <strong>Ops!</strong> Parece que tivemos alguns problemas.<br><br>
                                 <ul>
                                     @foreach ($errors->all() as $error)
                                         <li>{{ $error }}</li>
@@ -30,7 +30,7 @@
                                 </ul>
                             </div>
                         @endif
-                   <form class="form-horizontal" role="form" method="POST" action="/forgot">
+                   <form class="form-horizontal" role="form" method="POST" action="/esqueci-minha-senha">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="_method" value="POST">
                          <div class="row control-group">

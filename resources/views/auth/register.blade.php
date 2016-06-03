@@ -18,9 +18,7 @@
                         @foreach ($errors->all() as $error)
                         <li> 
                             @if($error)
-                            {{$error->first('unique')}} Esqueceu sua senha?
-                            @else
-                            {{$error}} 
+                               {{$error}} 
                             @endif
                         </li>
                         @endforeach

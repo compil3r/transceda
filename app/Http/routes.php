@@ -24,29 +24,34 @@ Route::get('jcrop', function()
 Route::post('jcrop', 'HistoriasController@imagem');
 Route::get('/cidades/{id_estado}', 'HistoriasController@getCidades');
 
-Route::get('perfil/{id_historia}', ['as' => 'perfil', 'uses' => 'HistoriasController@show']);
+Route::get('historia/{id_historia}', ['as' => 'historia', 'uses' => 'HistoriasController@show']);
+Route::post('configuracoes/atualizar-historia', ['as' => 'atualizar-historia', 'uses' => 'HistoriasController@update']);
 
-// Login e Logout routes...
+// Users - Login e Logout routes...
 Route::get('login', ['as' =>'login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('login', ['as' =>'login', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('logout', 'Auth\AuthController@getLogout');
 
-// Registration routes...
+// User - Registration routes...
 Route::get('register', ['as' =>'register', 'uses' => 'Auth\AuthController@getRegister']);
 Route::post('register', ['as' =>'register', 'uses' => 'Auth\AuthController@postRegister']);
 
-// Password reset link request routes...
-Route::get('forgot', ['as' =>'password/email', 'uses' => 'Auth\PasswordController@getEmail']);
-Route::post('forgot', ['as' =>'password/email', 'uses' => 'Auth\PasswordController@postEmail']);
+// Users - Password reset link request routes...
+Route::get('esqueci-minha-senha', ['as' =>'password/email', 'uses' => 'Auth\PasswordController@getEmail']);
+Route::post('esqueci-minha-senha', ['as' =>'password/email', 'uses' => 'Auth\PasswordController@postEmail']);
 
-// Password reset routes...
-Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post('password/reset', 'Auth\PasswordController@postReset');
+// Users - Password reset routes...
+Route::get('senha/reset/{token}', 'Auth\PasswordController@getReset');
+Route::post('senha/reset', 'Auth\PasswordController@postReset');
+
+//Users - Show, edit and delete routes...
 
 // Verifica se o usuário está logado
 Route::group(['middleware' => 'auth'], function()
 {
  Route::get('cadastrar-historia', 'HistoriasController@create');
+ Route::get('perfil/configuracoes', ['as' => 'configuracoes', 'uses' => 'Auth\AuthController@show']);
+
 });
 
 

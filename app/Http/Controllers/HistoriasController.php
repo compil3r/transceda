@@ -53,9 +53,31 @@ class HistoriasController extends Controller
           if ($validator->fails()) {
              return Redirect::to('cadastrar-historia')->withErrors($validator)->with('message', 'oi');
         }
+        
         if (Input::file('imagem')) {
             $imagem = $request->file('imagem');
-            $name= $imagem->getClientOriginalName();
+            $name = date('dmyhis').$imagem->getClientOriginalName();
+            $quality = 90;
+
+            if($imagem->move(public_path().'/imagem/', $name)){
+            $src  = public_path().'/imagem/'.$name;
+            if (File::extension($src)=='jpeg' || File::extension($src)=='jpg'){
+                $img  = imagecreatefromjpeg($src);
+            } else if (File::extension($src) == 'png'){
+                $img = imagecreatefrompng($src);
+            } else if (File::extension($src) == 'gif') {
+                $img = imagecreatefromgif($src);
+            } 
+            
+            $dest = ImageCreateTrueColor(Input::get('w'),
+                Input::get('h'));
+
+            imagecopyresampled($dest, $img, 0, 0, Input::get('x'),
+                Input::get('y'), Input::get('w'), Input::get('h'),
+                Input::get('w'), Input::get('h'));
+            imagejpeg($dest, $src, $quality);
+        }
+
         } else {
             $name = '0';
         }
@@ -67,41 +89,16 @@ class HistoriasController extends Controller
         $historia->finalidade = $request->get('objetivo');
         $historia->descricao = $request->get('historia');
         $historia->imagem = $name;
-        $historia->save();
-
-        $this->setTipo($historia->idUser);
-
-        if (Input::file('imagem')) {  
-             if($imagem->move(public_path().'/imagem/', $name)){
-                return Redirect::to('jcrop')->with('imagem', $name);
-            }
-        } else {
-            return Redirect::to('home');
+        
+        if ($historia->save()) {  
+            $this->setTipo($historia->idUser);
+         return Redirect::route('historia', $historia->id);
         }
 }
 
     public function imagem() {
 
-    $quality = 90;
-
-    $src  = Input::get('imagem');
-    if (File::extension($src)=='jpeg' || File::extension($src)=='jpg'){
-        $img  = imagecreatefromjpeg($src);
-    } else if (File::extension($src) == 'png'){
-        $img = imagecreatefrompng($src);
-    } else if (File::extension($src) == 'gif') {
-        $img = imagecreatefromgif($src);
-    } 
     
-    $dest = ImageCreateTrueColor(Input::get('w'),
-        Input::get('h'));
-
-    imagecopyresampled($dest, $img, 0, 0, Input::get('x'),
-        Input::get('y'), Input::get('w'), Input::get('h'),
-        Input::get('w'), Input::get('h'));
-    imagejpeg($dest, $src, $quality);
-
-    return Redirect::to('/');
     }
 
     /**
@@ -114,7 +111,7 @@ class HistoriasController extends Controller
     {
         $comentarios = Comentarios::where('idHistoria', $id)->orderBy('created_at', 'asc')->get();
 
-        return view('transcenda.historias.perfil', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->orderBy('created_at', 'dsc')->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id), 'falta' => $this->quantoFalta($id),'comentarios' => $comentarios));
+        return view('transcenda.historias.historia', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->orderBy('created_at', 'dsc')->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id), 'falta' => $this->quantoFalta($id),'comentarios' => $comentarios));
     }
 
     private function porcentagem($id) {
@@ -156,9 +153,13 @@ class HistoriasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
-        //
+        if (\DB::table('historias')->where('idUser', Auth::user()->id)->update(array('finalidade' => Input::get('objetivo'), 'descricao' => Input::get('historia'), 'meta' => Input::get('meta'))))
+            {
+                return Redirect::back()->with('message', 'História atualizada com sucesso!');
+             }
+
     }
 
     /**

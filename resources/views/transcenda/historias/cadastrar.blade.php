@@ -1,4 +1,7 @@
 @extends('layouts.layout')
+@section('css')
+<link rel="stylesheet" href="css/jquery.Jcrop.min.css" />
+@endsection
 @section('conteudo')
 <section id="contar">
 	<div class="container">
@@ -37,16 +40,39 @@
 				{!!Form::open(array('url'=>'/enviar', 'files'=>'true')) !!}
 				
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+				<input type="hidden" id="x" name="x" />
+        		<input type="hidden" id="y" name="y" />
+        		<input type="hidden" id="w" name="w" />
+        		<input type="hidden" id="h" name="h" />
 				<div class="row control-group">
 					<div class="form-group col-xs-12">	
 						<span class="btn btn-md btn-block btn-default fileinput-button">
 							<span>Adicionar uma foto a história</span>
-							<input type="file" name="imagem" id="files">
+							<input type="file" name="imagem" id="files" onchange="fileSelectHandler()">
 						</span>
 						<output id="list"></output>
 					</div>
 				</div>
+
+		
+
+		<div class="modal fade" id="modal1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Cortar Imagem</h4>
+					</div>
+					<div class="modal-body">
+				<img id="preview" class="img-responsive"/>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Cortar</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+
 				<input type="hidden" name="idUser" value="{{Auth::user()->id}}">
 				<div class="row control-group">
 					<div class="form-group col-xs-6">
@@ -96,6 +122,7 @@
 
 @section('jquery')
 <script src="/js/jquery.mask.min.js"></script>
+<script src="js/jquery.Jcrop.min.js"></script>
 @endsection
 
 @section('script')

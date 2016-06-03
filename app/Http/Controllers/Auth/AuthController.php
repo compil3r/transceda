@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Validator;
+use App\Historias;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
-
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -87,5 +88,10 @@ class AuthController extends Controller
         ]);
 
          
+    }
+
+    public function show() {
+        $historia = Historias::where('idUser', Auth::user()->id)->get();
+        return view('auth.configuracoes', array('historia' => $historia));
     }
 }

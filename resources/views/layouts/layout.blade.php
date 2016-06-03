@@ -22,6 +22,8 @@
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    @section('css')
+    @show
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -74,8 +76,8 @@
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="/imagem/{{Auth::user()->imagem}}" class="img-menu img-circle"> <span class="caret"></span></a>
                       <ul class="dropdown-menu">
+                        <li><a href="/perfil/configuracoes">Configurações</a></li>
                         <li><a href="/logout">Sair</a></li>
-                        <li><a href="/register">Editar</a></li>
 
                     </ul>
                 </li>
