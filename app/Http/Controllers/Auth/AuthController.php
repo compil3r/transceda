@@ -7,6 +7,8 @@ use App\Http\Requests;
 use App\User;
 use Validator;
 use App\Historias;
+use App\Cidades;
+use App\Estados;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -92,6 +94,68 @@ class AuthController extends Controller
 
     public function show() {
         $historia = Historias::where('idUser', Auth::user()->id)->get();
-        return view('auth.configuracoes', array('historia' => $historia));
+        $estados = Estados::all();
+        $cidades = Cidades::all();
+        return view('auth.configuracoes', array('historia' => $historia, 'estados' => $estados, 'cidades' => $cidades));
+    }
+
+    public function updatePicture(Request $request) {
+
+        if (Input::file('imagem')) {
+            $imagem = $request->file('imagem');
+            $name = date('dmyhis').$imagem->getClientOriginalName();
+            $quality = 90;
+
+            if($imagem->move(public_path().'/imagem/', $name)){
+            $src  = public_path().'/imagem/'.$name;
+            if (File::extension($src)=='jpeg' || File::extension($src)=='jpg'){
+                $img  = imagecreatefromjpeg($src);
+            } else if (File::extension($src) == 'png'){
+                $img = imagecreatefrompng($src);
+            } else if (File::extension($src) == 'gif') {
+                $img = imagecreatefromgif($src);
+            } 
+            
+            $dest = ImageCreateTrueColor($request->get('w'),
+                $request->get('h'));
+
+            imagecopyresampled($dest, $img, 0, 0, $request->get('x'),
+                $request->get('y'), $request->get('w'), $request->get('h'),
+                $request->get('w'), $request->get('h'));
+            imagejpeg($dest, $src, $quality);
+
+             if (\DB::table('users')->where('id', Auth::user()->id)->update(array('imagem' => $name)))
+            {
+                return Redirect::back()->with('message', 'Imagem  atualizada com sucesso!');
+             }
+
+        }
+    } else {
+        return Redirect::back()->with('message', 'Deu erro!');
+    }
+    }
+
+    public function update() {
+          if (\DB::table('users')->where('id', Auth::user()->id)->update(array('name' => Input::get('name'), 'cpf' => Input::get('cpf'), 'aniversario' => Input::get('aniversario'), 'email' => Input::get('email'))))
+            {
+                return Redirect::back()->with('message', 'Perfil atualizado com sucesso!');
+             }
+    }
+
+    public function updatePassword() {
+        if (Input::get('senha') == Input::get('confirma')) {
+            if (password_verify(Input::get('atual'), Auth::user()->password)) {
+                 if (\DB::table('users')->where('id', Auth::user()->id)->update(array('password' => bcrypt(Input::get('senha')))))
+                 {
+                   return Redirect::back()->with('message', 'Senha atualizada com sucesso!');  
+                 }
+            } else {
+                return bcrypt(Input::get('atual')). " " . Auth::user()->password;
+            }
+
+        } else {
+            return "senhas nao iguais!";
+        }
+        
     }
 }

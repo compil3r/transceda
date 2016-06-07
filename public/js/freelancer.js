@@ -1,4 +1,10 @@
+$('#fotoDaHistoria').click(function() {
+    $('#tipo').val('1');
+    $('#files').click();
+});
+
 $('#fotoDePerfil').click(function() {
+    $('#tipo').val('2');
     $('#files').click();
 });
 
@@ -121,7 +127,9 @@ function clearInfo() {
 // Create variables (in this scope) to hold the Jcrop API and image size
 var jcrop_api, boundx, boundy;
 function fotoHistoria() {
-
+    if ($('#btnFotoPerfil').length) {
+        $('#btnFotoPerfil').hide();
+    }
     if (!$('#btnFotoHistoria').length) {
     $('#botao-final').append("<input form=\"formHistoria\" type=\"submit\" onclick=\"enviarForm();\" id=\"btnFotoHistoria\" class=\"btn btn-primary\" data-dismiss=\"modal\" value=\"Salvar\">");
     }
@@ -129,13 +137,18 @@ function fotoHistoria() {
     fileSelectHandler();
 }
 
+
 function enviarForm() {
     $('#formHistoria').submit();
 }
+
 function fileSelectHandler() {
     $('#modal1').modal('show');
     // get selected file
     var oFile = $('#files')[0].files[0];
+    if (oFile == undefined) {
+        oFile = $('.tFotoPerfil')[0].files[0];
+    }
 
     // hide all errors
     $('.error').hide();

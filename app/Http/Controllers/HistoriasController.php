@@ -146,6 +146,7 @@ class HistoriasController extends Controller
 
     public function updatePicture(Request $request) {
 
+        if(Input::get('tipo') == '1') {
         if (Input::file('imagem')) {
             $imagem = $request->file('imagem');
             $name = date('dmyhis').$imagem->getClientOriginalName();
@@ -177,6 +178,40 @@ class HistoriasController extends Controller
         }
     } else {
         return Redirect::back()->with('message', 'Deu erro!');
+    }
+    } else {
+        if (Input::file('imagem')) {
+            $imagem = $request->file('imagem');
+            $name = date('dmyhis').$imagem->getClientOriginalName();
+            $quality = 90;
+
+            if($imagem->move(public_path().'/imagem/', $name)){
+            $src  = public_path().'/imagem/'.$name;
+            if (File::extension($src)=='jpeg' || File::extension($src)=='jpg'){
+                $img  = imagecreatefromjpeg($src);
+            } else if (File::extension($src) == 'png'){
+                $img = imagecreatefrompng($src);
+            } else if (File::extension($src) == 'gif') {
+                $img = imagecreatefromgif($src);
+            } 
+            
+            $dest = ImageCreateTrueColor(Input::get('w'),
+                Input::get('h'));
+
+            imagecopyresampled($dest, $img, 0, 0, Input::get('x'),
+                Input::get('y'), Input::get('w'), Input::get('h'),
+                Input::get('w'), Input::get('h'));
+            imagejpeg($dest, $src, $quality);
+
+             if (\DB::table('users')->where('id', Auth::user()->id)->update(array('imagem' => $name)))
+            {
+                return Redirect::back()->with('message', 'Imagem  atualizada com sucesso!');
+             }
+
+        }
+    } else {
+        return Redirect::back()->with('message', 'Deu erro!');
+    }
     }
 }
 

@@ -46,7 +46,8 @@ Route::get('senha/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('senha/reset', 'Auth\PasswordController@postReset');
 
 //Users - Show, edit and delete routes...
-
+Route::post('configuracoes/atualizar-perfil', ['as' => 'atualizar-perfil', 'uses' => 'Auth\AuthController@update']);
+Route::post('configuracoes/atualizar-senha', ['as' => 'atualizar-senha', 'uses' => 'Auth\AuthController@updatePassword']);
 // Verifica se o usuário está logado
 Route::group(['middleware' => 'auth'], function()
 {
