@@ -26,6 +26,7 @@ Route::get('/cidades/{id_estado}', 'HistoriasController@getCidades');
 
 Route::get('historia/{id_historia}', ['as' => 'historia', 'uses' => 'HistoriasController@show']);
 Route::post('configuracoes/atualizar-historia', ['as' => 'atualizar-historia', 'uses' => 'HistoriasController@update']);
+Route::post('configuracoes/atualizar-foto-historia', ['as' => 'atualizar-foto-historia', 'uses' => 'HistoriasController@updatePicture']);
 
 // Users - Login e Logout routes...
 Route::get('login', ['as' =>'login', 'uses' => 'Auth\AuthController@getLogin']);

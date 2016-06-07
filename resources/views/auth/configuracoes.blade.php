@@ -36,10 +36,23 @@
                                 Trocar Foto</h2>
                             </div>
                         </div>
+
+
                         <img class="img-responsive perfil" src="/imagem/{{$historia->imagem}}">
                     </a>
+
+                    {!!Form::open(array('url'=>'/configuracoes/atualizar-foto-historia', 'files'=>'true', 'id' => 'formHistoria')) !!}
+
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" id="x" name="x" />
+                    <input type="hidden" id="y" name="y" />
+                    <input type="hidden" id="w" name="w" />
+                    <input type="hidden" id="h" name="h" />
+
+                    <input type="file" id="files" name="imagem" onchange="fotoHistoria()" style="display:none;" />
+                </form>
                 </div>
-                <input type="file" id="files" onchange="fileSelectHandler()" style="display:none;" />
+                <input type="file" id="files" onchange="fotoHistoria()" style="display:none;" />
 				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
 				Meta: {{$historia->meta}}
 				<br>

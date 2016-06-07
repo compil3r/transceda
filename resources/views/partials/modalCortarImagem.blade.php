@@ -8,8 +8,8 @@
 					<div class="modal-body">
 				<img id="preview" class="img-responsive"/>
 					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" data-dismiss="modal">Cortar</button>
+					<div class="modal-footer" id="botao-final">
+
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->

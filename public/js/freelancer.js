@@ -120,7 +120,18 @@ function clearInfo() {
 
 // Create variables (in this scope) to hold the Jcrop API and image size
 var jcrop_api, boundx, boundy;
+function fotoHistoria() {
 
+    if (!$('#btnFotoHistoria').length) {
+    $('#botao-final').append("<input form=\"formHistoria\" type=\"submit\" onclick=\"enviarForm();\" id=\"btnFotoHistoria\" class=\"btn btn-primary\" data-dismiss=\"modal\" value=\"Salvar\">");
+    }
+
+    fileSelectHandler();
+}
+
+function enviarForm() {
+    $('#formHistoria').submit();
+}
 function fileSelectHandler() {
     $('#modal1').modal('show');
     // get selected file
