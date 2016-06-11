@@ -118,10 +118,11 @@
 
     @section('jquery')
     <script src="/js/jquery.mask.min.js"></script>
+    <script src="/js/mascaras.js"></script>
     @endsection
 
     @section('script')
-
+    <script src="/js/transcendaJcrop.js"></script>
     <script type="text/javascript">
         $('select[name=estado]').change(function () {
             var id_estado = $(this).val();

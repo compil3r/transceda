@@ -8,6 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
+    <script src="/js/jquery.js"></script>
+    @section('head')
+    @show
+
     <link rel="shortcut icon" href="/img/icone.png" type="image/x-icon">
      <meta name="csrf-token" content="{{{ Session::token() }}}">
     <title>Projeto [Trans]cenda - @yield('titulo')</title>
@@ -19,11 +24,9 @@
     <link href="/css/transcenda.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    @section('css')
-    @show
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -149,7 +152,7 @@
 
     <!-- jQuery -->
 
-    <script src="/js/jquery.js"></script>
+
     @section('jquery')
     @show
     <!-- Bootstrap Core JavaScript -->
@@ -165,7 +168,7 @@
     <!-- Contact Form JavaScript -->
     <script src="/js/jqBootstrapValidation.js"></script>
     <!--    <script src="js/contact_me.js"></script> -->
-    <script src="/js/freelancer.js"></script>
+    <script src="/js/transcenda.js"></script>
     
     @section('script')
 

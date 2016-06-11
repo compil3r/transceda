@@ -45,16 +45,7 @@ class HistoriasController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'idUser' => 'required|unique:historias',
-  
-        ]);
-
-          if ($validator->fails()) {
-             return Redirect::to('cadastrar-historia')->withErrors($validator)->with('message', 'oi');
-        }
-        
-        if (Input::file('imagem')) {
+         if (Input::file('imagem')) {
             $imagem = $request->file('imagem');
             $name = date('dmyhis').$imagem->getClientOriginalName();
             $quality = 90;
@@ -109,9 +100,10 @@ class HistoriasController extends Controller
      */
     public function show($id)
     {
+
         $comentarios = Comentarios::where('idHistoria', $id)->orderBy('created_at', 'asc')->get();
 
-        return view('transcenda.historias.historia', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->orderBy('created_at', 'dsc')->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id), 'falta' => $this->quantoFalta($id),'comentarios' => $comentarios));
+        return view('transcenda.historias.historia', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->orderBy('created_at', 'dsc')->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id), 'falta' => $this->quantoFalta($id),'comentarios' => $comentarios, 'grafico' => $this->getDoacoes($id)));
     }
 
     private function porcentagem($id) {
@@ -248,18 +240,6 @@ class HistoriasController extends Controller
         \DB::table('users')->where('id', $idUser)->update(array('tipo' => 2));
     }
 
-      public function getCidades($id_estado)
-    {
-
-
-        $estados = new Estados();
-
-        $estado = $estados->find($id_estado);
-
-        $cidades = $estado->cidades()->getQuery()->get(['id', 'nome']);
-        
-        return Response::json($cidades);
-    }
 
     public function comentar(){
 
@@ -280,6 +260,44 @@ class HistoriasController extends Controller
         return Redirect::back()->with('message', 'Comentário excluido!');
     }
 
+      public function getCidades($id_estado)
+    {
+
+
+        $estados = new Estados();
+
+        $estado = $estados->find($id_estado);
+
+        $cidades = $estado->cidades()->getQuery()->get(['id', 'nome']);
+        
+        return Response::json($cidades);
+    }
+
+    public function getDoacoes($id) {
+ 
+      $doacoes = \DB::table('doacoes')->where('idHistoria', $id)->groupBy('created_at')->get();
+        if (count($doacoes) > 0) {
+        $stocksTable = \Lava::DataTable();
+        $stocksTable->addDateColumn('Dia')
+        ->addNumberColumn('Doação');
+
+
+        foreach ($doacoes as $doacao) {
+        $rowData = [
+            $doacao->created_at, $doacao->valor
+            ];
+
+            $stocksTable->addRow($rowData);
+        
+        }
+            
+      $grafico = \Lava::LineChart('Stocks', $stocksTable, ['legend' => 'none', 'colors' => ['pink']]);
+    } else {
+        $grafico = null;
+    }
+      return $grafico;
+
+    }
 }
 
 

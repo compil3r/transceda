@@ -10,7 +10,8 @@
 	    "illuminate/html": "5.0.*@dev",
         "barryvdh/laravel-debugbar": "^2.2",
         "pagseguro/php": "@stable",
-        "paypal/rest-api-sdk-php": "^1.7"
+        "paypal/rest-api-sdk-php": "^1.7",
+        "khill/lavacharts" : "3.0.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

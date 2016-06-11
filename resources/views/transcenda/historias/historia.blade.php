@@ -38,6 +38,7 @@
         }
 
         return $retorno;
+
     }
 
 
@@ -47,23 +48,24 @@
 @extends('layouts.layout')
 @section('conteudo')
 <section id="perfil">
+
 <div class="container">
 <div class="row">
 	@if (Session::has('message'))
 		<div class="alert alert-warning" role="alert">{{Session::get('message')}}</div>
 	@endif
 			<div class="col-lg-12 text-center">
-			<img class="img-responsive perfil" src="/imagem/{{$historia->imagem}}">
+			<img class="img-responsive img-circle perfil" src="/imagem/{{$historia->imagem}}">
 <h2 class="nome">{{$historia->autor->name}}</h2>
 				<hr class="star-primary">
 			</div>
 </div>
 <div class="row">
 <div class="col-lg-12 text-center">
-<h3>Meta: R$ {{$historia->meta}} <br> Arrecadado: R$ {{floatval($total)}},00</h3>
+<h3>Meta: R$ {{floatval($historia->meta)}} <br> Arrecadado: R$ {{floatval($total)}},00</h3>
 <h4>Finalidade: {{$historia->finalidade}}</h4>
 <div class="progress">
-  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{$total}}" aria-valuemin="0" aria-valuemax="{{$historia->meta}}" style="width: {{$porcentagem}}%">
+  <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{$total}}" aria-valuemin="0" aria-valuemax="{{floatval($historia->meta)}}" style="width: {{$porcentagem}}%">
   </div>
 </div>
 </div>
@@ -75,12 +77,17 @@
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 <h4 class='center'>Andamento das doacoes</h4>
-aqui vai um grafico 
-  @if (!Auth::guest())
-  	@if(Auth::user()->id == $historia->autor->id)
-  	editar
-  	@endif
-  @endif
+@if ($grafico == null)
+
+<div class="well"><h4 align="center">Ainda não houveram doações =(</h4></div>
+
+@else
+<div id="stocks-div"></div>
+<?php 
+echo Lava::render('LineChart', 'Stocks', 'stocks-div');
+ ?>
+@endif     
+
 </div>
 </div>
 <div class="row center">
@@ -133,7 +140,7 @@ Não há doações. Por que você não ajuda? :)
 @foreach ($comentarios as $comentario)
 <div class="media">
   <div class="media-left">
-     <img class="media-object" src="/imagem/{{$comentario->autor->imagem}}" alt="...">
+     <img class="media-object img-circle" src="/imagem/{{$comentario->autor->imagem}}" alt="...">
    </div>
   <div class="media-body">
     <h4 class="media-heading">{{$comentario->autor->name}} 
@@ -172,3 +179,7 @@ Não há comentários nesta história! Seja o primeiro.
 @if (!Auth::guest())
 	@include('partials.modalDoar');
 @endif
+
+@section('script')
+	<script src="/js/doacoes.js"></script>
+@endsection

@@ -59,6 +59,9 @@ Route::group(['middleware' => 'auth'], function()
 
 //PagSeguro
 
+//Gráficos
+Route::get('/graficos/doacoes/{id}', 'HistoriasController@getDoacoes');
+
 // Enviamos nuestro pedido a PayPal
 Route::post('pagar', array(
 	'as' => 'payment',

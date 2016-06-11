@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('css')
+@section('head')
 <link rel="stylesheet" href="/css/jquery.Jcrop.min.css" />
 @endsection
 @section('conteudo')
@@ -150,4 +150,5 @@
 
 @section('script')
 <script src="/js/jquery.Jcrop.min.js"></script>
+<script src="/js/transcendaJcrop.js"></script>
 @endsection

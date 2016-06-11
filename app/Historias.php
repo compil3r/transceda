@@ -18,7 +18,7 @@ class Historias extends Model
     }
 
     public function doacoes() {
-    	return $this->hasMany('App\Doacoes', 'idHistoria', 'id');
+    	return $this->hasMany('App\Doacoes', 'idHistoria');
     }
     
     public function comentarios() {
