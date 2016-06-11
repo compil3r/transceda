@@ -16,7 +16,6 @@ class CreateHistoriasTable extends Migration
             $table->increments('id');
             $table->integer('idUser')->unsigned();
             $table->foreign('idUser')->references('id')->on('users');
-            $table->string('titulo');
             $table->string('finalidade');
             $table->string('meta');
             $table->string('imagem');
