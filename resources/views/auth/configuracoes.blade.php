@@ -17,6 +17,11 @@
 		</div>
 
 		<div class="row">
+		<ul class="nav nav-pills nav-justified">
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+  <li role="presentation"><a href="#">Profile</a></li>
+  <li role="presentation"><a href="#">Messages</a></li>
+</ul>
 			<br>
 			@if (Auth::user()->tipo == 2)
 			<p align="center"><a class="btn btn-primary teste" role="button" data-parent="acorddion" data-toggle="collapse" href="#collapseExample" aria-expanded="false" data-toggle="collapse" aria-controls="collapseExample">
@@ -57,12 +62,19 @@
                 </div>
                 <input type="file" id="files" onchange="fotoHistoria()" style="display:none;" />
 				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
-				Meta: {{$historia->meta}}
+				<b>Meta</b>: R${{$historia->meta}}
 				<br>
-				Objetivo: {{$historia->finalidade}}
+				@if ($historia->arrecadado > 0)
+				<b>Arrecadado:</b> R${{$historia->arrecadado}} <a  data-toggle="modal" data-target="#modalRealizarSaque" class="btn btn-info btn-xs btn-saque">Solicitar saque</a>
+				@else 
+				<b>Arrecadado:</b> R${{$historia->arrecadado}} <a class="btn btn-info btn-xs btn-saque" disabled>Solicitar saque</a>
+				@endif
+				</br>
+				<b>Objetivo:</b> {{$historia->finalidade}}
 				<br>
-				Descrição: {{$historia->descricao}}
-				<br><br>
+				<b>Descrição:</b> {{$historia->descricao}}
+				<br>
+						<br>
 				<a data-toggle="modal" data-target="#modalEditarHistoria" class="btn btn-sm btn-default">Editar</a>
 				<a data-toggle="modal" data-target="#modalExcluirHistoria" class="btn btn-sm btn-danger">Excluir</a>
 				</div>
@@ -70,6 +82,7 @@
 			@include ('partials.modalCortarImagem')
 			@include('partials.modalEditarHistoria')
 			@include ('partials.modalExcluirHistoria')
+			@include('partials.modalRealizarSaque')
 
 		@endforeach
 		<div class="collapse" id="teste">

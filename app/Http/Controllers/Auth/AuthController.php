@@ -9,6 +9,8 @@ use Validator;
 use App\Historias;
 use App\Cidades;
 use App\Estados;
+use App\Doacoes;
+use App\Mensagens;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -92,11 +94,13 @@ class AuthController extends Controller
          
     }
 
-    public function show() {
+    public function configPerfil() {
         $historia = Historias::where('idUser', Auth::user()->id)->get();
+        $doacoes = Doacoes::where('idHistoria', $historia->get('id'))->get();
         $estados = Estados::all();
         $cidades = Cidades::all();
-        return view('auth.configuracoes', array('historia' => $historia, 'estados' => $estados, 'cidades' => $cidades));
+        $quantidadeMsg = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        return view('configuracoes.perfil', array('historia' => $historia, 'estados' => $estados, 'cidades' => $cidades, 'doacoes' => $doacoes, 'quantidadeMsg' => $quantidadeMsg));
     }
 
     public function updatePicture(Request $request) {
@@ -158,4 +162,5 @@ class AuthController extends Controller
         }
         
     }
+
 }

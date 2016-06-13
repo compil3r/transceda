@@ -6856,6 +6856,25 @@ a.list-group-item-danger.active:focus {
 .politica {
   font-size: 16px;
 }
+
+.mensagens {
+  font-size: 14px;
+}
+
+
+.btn-saque {
+  margin-top: -7px;
+  margin-left: 5px;
+}
+
+.menu-horizontal {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.panel-body {
+  padding-bottom: 0px;
+}
 /*
   END HISTORIA
 */

@@ -42,4 +42,9 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsTo('App\Cidades', 'idCidade');
     }
     
+
+     public function mensagens() {
+
+        return $this->hasMany('App\Mensagens', 'idRecebedor', 'idUser');
+    }
 }

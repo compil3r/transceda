@@ -46,31 +46,39 @@ Route::get('senha/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('senha/reset', 'Auth\PasswordController@postReset');
 
 //Users - Show, edit and delete routes...
-Route::post('configuracoes/atualizar-perfil', ['as' => 'atualizar-perfil', 'uses' => 'Auth\AuthController@update']);
-Route::post('configuracoes/atualizar-senha', ['as' => 'atualizar-senha', 'uses' => 'Auth\AuthController@updatePassword']);
+
+
+
+//Historias
 // Verifica se o usuário está logado
 Route::group(['middleware' => 'auth'], function()
 {
  Route::get('cadastrar-historia', 'HistoriasController@create');
- Route::get('perfil/configuracoes', ['as' => 'configuracoes', 'uses' => 'Auth\AuthController@show']);
-
+ Route::get('configuracoes/perfil', ['as' => 'configuracoes', 'uses' => 'Auth\AuthController@configPerfil']);
+ Route::post('configuracoes/perfil', ['as' => 'atualizar-perfil', 'uses' => 'Auth\AuthController@update']);
+ Route::post('configuracoes/atualizar-senha', ['as' => 'atualizar-senha', 'uses' => 'Auth\AuthController@updatePassword']);
+ Route::get('configuracoes/historia', 'HistoriasController@configHistoria');
+ Route::get('configuracoes/mensagens', 'MensagensController@index');
+ Route::get('configuracoes/mensagens/ler/{id}', 'MensagensController@ler');
+ Route::get('configuracoes/mensagens/excluir/{id}', 'MensagensController@destroy');
 });
 
-
-//PagSeguro
+//Doacoes 
+Route::post('/configuracoes/sacar', 'DoacoesController@sacar');
 
 //Gráficos
 Route::get('/graficos/doacoes/{id}', 'HistoriasController@getDoacoes');
 
+//PagSeguro
 // Enviamos nuestro pedido a PayPal
 Route::post('pagar', array(
 	'as' => 'payment',
-	'uses' => 'PaypalController@postPayment',
+	'uses' => 'DoacoesController@postPayment',
 ));
 // Después de realizar el pago Paypal redirecciona a esta ruta
 Route::get('payment/status', array(
 	'as' => 'payment.status',
-	'uses' => 'PaypalController@getPaymentStatus',
+	'uses' => 'DoacoesController@getPaymentStatus',
 ));
 
 Route::post('comentar', ['as' => 'comentar', 'uses' => 'HistoriasController@comentar']);

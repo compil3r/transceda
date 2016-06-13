@@ -10,8 +10,6 @@
     <meta name="author" content="">
 
     <script src="/js/jquery.js"></script>
-    @section('head')
-    @show
 
     <link rel="shortcut icon" href="/img/icone.png" type="image/x-icon">
      <meta name="csrf-token" content="{{{ Session::token() }}}">
@@ -28,6 +26,8 @@
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
+    @section('head')
+    @show
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

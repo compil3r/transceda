@@ -10,6 +10,8 @@ use App\User;
 use App\Estados;
 use App\Doacoes;
 use App\Comentarios;
+use App\Mensagens;
+use App\Saques;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
@@ -36,7 +38,7 @@ class HistoriasController extends Controller
       
     }
 
-    /**
+   /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,10 +72,9 @@ class HistoriasController extends Controller
         }
 
         } else {
-            $name = '0';
+            $name = 'sem_nome';
         }
-
-        
+       
         $historia = new Historias();
         $historia->idUser = $request->get('idUser');
         $historia->meta = $request->get('meta');
@@ -86,6 +87,30 @@ class HistoriasController extends Controller
          return Redirect::route('historia', $historia->id);
         }
 }
+
+
+
+
+    public function configHistoria() {
+        $historia = Historias::where('idUser', Auth::user()->id)->get();
+        foreach ($historia as $historias) {
+        $doacoes = Doacoes::where('idHistoria', $historias->id)->get();
+        $saques = Saques::where('idHistoria', $historias->id)->get();
+        $saquesRecebidos = Saques::where('idHistoria', $historias->id)->where('status', 1)->get();
+        $saquesAtendidosTotal = Saques::where('idHistoria', $historias->id)->where('status', 2)->sum('valor');
+        $saquesAtendidos = Saques::where('idHistoria', $historias->id)->where('status', 2)->get();
+        $saquesRecusados = Saques::where('idHistoria', $historias->id)->where('status', 3)->get();
+        
+        }
+
+        $quantidadeMsg = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+
+
+        return view('configuracoes.historia', array('historia' => $historia, 'doacoes' => $doacoes, 'quantidadeMsg' => $quantidadeMsg,
+            'saques' => $saques, 'saquesRecebidos' => $saquesRecebidos, 'saquesAtendidos' => $saquesAtendidos, 'saquesAtendidosTotal' => $saquesAtendidosTotal, 'saquesRecusados' => $saquesRecusados));
+    }
+
+ 
 
     public function imagem() {
 
