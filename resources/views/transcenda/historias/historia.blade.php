@@ -181,12 +181,14 @@ Não há comentários nesta história! Seja o primeiro.
 	@if (!Auth::guest())
 	<textarea class="form-control" name="comentario" placeholder="Escreva seu comentário!">
 	</textarea>
+	<br>
+	<input type="submit" class="btn btn-default" value="Comentar">
 	@else
 	<textarea class="form-control" name="comentario" disabled>Faça login para comentar!
 	</textarea>
-	@endif
 	<br>
-	<input type="submit" class="btn btn-default" value="Comentar">
+	<input type="submit" class="btn btn-default" value="Comentar" disabled>
+	@endif
 </form>
 </div>
 </section>

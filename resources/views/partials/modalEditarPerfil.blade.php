@@ -9,7 +9,7 @@
 				<h4 class="modal-title">Editar Perfil</h4>
 			</div>
 			<div class="modal-body">
-	{!!Form::open(array('url'=>'/configuracoes/atualizar-perfil', 'files'=>'true')) !!}
+	{!!Form::open(array('url'=>'/configuracoes/perfil', 'files'=>'true')) !!}
 				
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="row control-group">
