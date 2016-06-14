@@ -129,15 +129,17 @@ class DoacoesController extends Controller
 			$doacao->idHistoria = Session::get('historia');
 			$doacao->save();
 
-
-			$output = new \Symfony\Component\Console\Output\ConsoleOutput(2);
-
 			$historia = Historias::find($doacao->idHistoria)->arrecadado;
-			$output->writeln($historia);
 			$total = $historia + floatval($doacao->valor);
-			$output->writeln($total);
 			\DB::table('historias')->where('id', $doacao->idHistoria)->update(['arrecadado' => $total]);
 
+			$mensagem = new Mensagens();
+			$mensagem->assunto = "Nova doação";
+			$mensagem->idRecebedor = Historias::find($doacao->idHistoria)->autor->id;
+			$nome = User::find($doacao->idDoador)->name;
+			$mensagem->status = 1;
+			$mensagem->mensagem = "Você recebeu uma nova doação de $nome, no valor de $doacao->valor. Se você não tem saques pendentes já pode verificar o valor disponivel e solicitar um, ali na aba de histórias. Estamos muito felizes, que continuemos assim! Beijocas.";
+			$mensagem->save();
 
 			return \Redirect::route('historia', $doacao->idHistoria)->with('message', 'Sua doação foi processada com sucesso! Obrigado <3');
 		}

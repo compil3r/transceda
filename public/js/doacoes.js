@@ -6,3 +6,10 @@ if(res1) {
 		res1.innerHTML = "R$" + p.value;
 	}, false);
 }
+
+function editarComentario(id) {
+	$("#comentario_"+id).hide();
+	$("#editar_"+id).show();
+
+	console.log(id);
+}

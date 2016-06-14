@@ -161,6 +161,14 @@ class HistoriasController extends Controller
         //
     }
 
+    public function atualizarComentario() {
+
+        if (\DB::table('comentarios')->where('id', Input::get('comentarioID'))->update(array('conteudo' => Input::get('comentario'))))
+            {
+                return Redirect::back()->with('message', 'Comentário atualizado com sucesso!');
+             }
+    }
+
     public function updatePicture(Request $request) {
 
         if(Input::get('tipo') == '1') {

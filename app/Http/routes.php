@@ -82,5 +82,6 @@ Route::get('payment/status', array(
 ));
 
 Route::post('comentar', ['as' => 'comentar', 'uses' => 'HistoriasController@comentar']);
+Route::post('atualizar-comentario', ['as' => 'atualizar-comentario', 'uses' => 'HistoriasController@atualizarComentario']);
 
 Route::get('excluircomentario/{id}', 'HistoriasController@excluirComentario');

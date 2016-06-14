@@ -147,12 +147,27 @@ Não há doações. Por que você não ajuda? :)
 	    @if (!Auth::guest())
 	  	@if(Auth::user()->id == $comentario->autor->id)
 	 		<a class="btn btn-danger btn-sm" href="/excluircomentario/{{$comentario->id}}"><span class="glyphicon glyphicon-trash"></span></a>
-	  		<a class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span></a>
+	  		<a class="btn btn-default btn-sm" onclick="editarComentario({{$comentario->id}});"><span class="glyphicon glyphicon-pencil"></span></a>
 	  	@endif
 	    @endif
     </h4>
- 	{{$comentario->conteudo}} <br>
+ 	<div id="comentario_{{$comentario->id}}" class="sera">
+ 		{{$comentario->conteudo}} <br>
 	<span class="hora">	Publicado há {{tempoPostagem($comentario->created_at)}}</span>
+ 	</div>
+ 	 @if (!Auth::guest())
+	 @if(Auth::user()->id == $comentario->autor->id)
+	 <div id="editar_{{$comentario->id}}" style="display: none;">
+	 	{!! Form::open (['method' => 'POST', 'route' => 'atualizar-comentario', $historia->id]) !!}
+			<div class="col-md-8 col-lg-8 col-sm-8 col-xs-8">
+				<input type="hidden" name="comentarioID" value="{{$comentario->id}}">
+				<textarea name="comentario" class="form-control">{{$comentario->conteudo}}</textarea>
+				<br><input type="submit" class="btn btn-default btn-sm" value="Atualizar">
+			</div>
+		</form>
+	  </div>	
+	 @endif
+	 @endif
   </div>
 </div>
 @endforeach
@@ -167,7 +182,7 @@ Não há comentários nesta história! Seja o primeiro.
 	<textarea class="form-control" name="comentario" placeholder="Escreva seu comentário!">
 	</textarea>
 	@else
-	<textarea class="form-control" name="comentario" disabled>
+	<textarea class="form-control" name="comentario" disabled>Faça login para comentar!
 	</textarea>
 	@endif
 	<br>
