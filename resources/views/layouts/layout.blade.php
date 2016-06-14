@@ -79,7 +79,7 @@
                     <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="/imagem/{{Auth::user()->imagem}}" class="img-menu img-circle"> <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li><a href="/perfil/configuracoes">Configurações</a></li>
+                        <li><a href="/configuracoes/perfil">Configurações</a></li>
                         <li><a href="/logout">Sair</a></li>
 
                     </ul>

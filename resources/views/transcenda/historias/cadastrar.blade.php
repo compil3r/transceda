@@ -77,7 +77,7 @@
 				<div class="row control-group">
 					<div class="form-group col-xs-6">
 						<label>Meta: (R$)</label>
-						<input onKeyUp="maskIt(this,event,'### ### ###.##',true)" type="text" id="meta" class="form-control" name="meta" placeholder="R$ 0,00" required data-validation-required-message="Por favor, entre com sua meta" >
+						<input onKeyUp="maskIt(this,event,'#########.##',true)" type="number" id="meta" class="form-control" name="meta" placeholder="R$ 0,00" required data-validation-required-message="Por favor, entre com sua meta" >
 						<p class="help-block text-danger"></p>
 					</div>
 

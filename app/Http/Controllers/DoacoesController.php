@@ -48,34 +48,6 @@ class DoacoesController extends Controller
 		\Session::put('valor', $request->get('valor'));
 		\Session::put('historia', $request->get('historia'));
 
-		$addr = new Address();
-		$addr->setLine1('52 N Main ST');
-		$addr->setCity('Johnstown');
-		$addr->setCountryCode('BR');
-		$addr->setPostalCode('43210');
-		$addr->setState('RS');
-
-		/*		
-		
-		$card = new CreditCard();
-		$card->setNumber("4002356531411474")
-		->setType("visa")
-		->setExpireMonth("05")
-		->setExpireYear("2021")
-		->setCvv2("111")
-		->setFirstName("Vitor")
-		->setLastName("Buyer")
-		->setBillingAddress($addr);
-
-
-		$fundingInstruments = new FundingInstrument();
-		$fundingInstruments->setCreditCard($card);
-
-		$payer = new Payer();
-		$payer->setPaymentMethod('credit_card')
-		->setFundingInstruments($fundingInstruments);
-		*/
-
 		$payer = new Payer();
 		$payer->setPaymentMethod('paypal');
 
@@ -106,7 +78,7 @@ class DoacoesController extends Controller
 				$err_data = json_decode($ex->getData(), true);
 				exit;
 			} else {
-				die('Ups! Algo salió mal');
+				die('Ops, aconteceu algo de errado!');
 			}
 		}
 		foreach($payment->getLinks() as $link) {
@@ -121,8 +93,6 @@ class DoacoesController extends Controller
 			// redirect to paypal
 			return \Redirect::away($redirect_url);
 		}
-		return \Redirect::route('cart-show')
-			->with('error', 'Ups! Error desconocido.');
 	}
 
 
