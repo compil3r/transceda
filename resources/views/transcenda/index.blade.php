@@ -90,8 +90,10 @@
                                   </div> 
                                 <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                                     <p>{{substr($historia->descricao, 0, 350)}}...</p>
-                                </div>    
-                                <a href="/historia/{{$historia->id}}" class="btn  btn-lg btn-outline">VER MAIS</a>
+                                </div> 
+                                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                    <a href="/historia/{{$historia->id}}" class="btn  btn-lg btn-outline">VER MAIS</a>
+                                </div>
                             </div>
                             <?php $num++; ?>
                            @endforeach

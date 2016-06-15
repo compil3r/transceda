@@ -31,7 +31,7 @@
         if ($horaH > $hora) {
             $retorno .= $horaH - $hora . ' horas atras, ';
             $retorno .= ($minH - $min)*(-1) . ' minutos e ';
-            $retorno .= ($segH - $seg) *(-1) . ' segundos';
+            $retorno .= ($segH - $seg) *(1) . ' segundos';
         }
         if ($retorno == null) {
         	$retorno .= "menos de uma hora atrás";
