@@ -33,8 +33,8 @@
 			<?php $i = 0;
 			$j = 0; ?>
 			@if(count($mensagens) > 0)
-			@foreach($mensagens as $mensagens)
-			@if ($mensagens->status == 1)
+			@foreach($mensagens as $mensagem)
+			@if ($mensagem->status == 1)
 			@if ($i == 0)
 			<div class="col-md-offset-2 col-xs-offset-2  col-sm-offset-2  col-lg-offset-2 col-md-8 col-xs-8 col-sm-8 col-lg-8">	
 			<h3>Não lidas</h3>
@@ -44,15 +44,18 @@
 			<div class="col-md-offset-2 col-xs-offset-2  col-sm-offset-2  col-lg-offset-2 col-md-8 col-xs-8 col-sm-8 col-lg-8">	
 
 				<div class="panel panel-info">
-					<div class="panel-heading">Assunto: {{$mensagens->assunto}}</div>
+					<div class="panel-heading">Assunto: {{$mensagem->assunto}}</div>
 					<div class="panel-body">
-						<p align="center" class="mensagens">{{$mensagens->mensagem}}</p>
+						<p align="center" class="mensagens">{{$mensagem->mensagem}}</p>
 
-						<p align="center" class="mensagens"><a href="/configuracoes/mensagens/ler/{{$mensagens->id}}" class="btn btn-info btn-sm">Marcar como lida</a></p>
+						<p align="center" class="mensagens"><a href="/configuracoes/mensagens/ler/{{$mensagem->id}}" class="btn btn-info btn-sm">Marcar como lida</a></p>
 					</div>
 				</div>
 			</div>
-			@else
+			@endif
+			@endforeach
+			@foreach($mensagens as $mensagens)
+			@if ($mensagens->status == 2)
 			@if ($j == 0)
 			<div class="col-md-offset-2 col-xs-offset-2  col-sm-offset-2  col-lg-offset-2 col-md-8 col-xs-8 col-sm-8 col-lg-8">	
 				<h3>Lidas</h3>

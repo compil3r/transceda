@@ -61,6 +61,13 @@ Route::group(['middleware' => 'auth'], function()
  Route::get('configuracoes/mensagens', 'MensagensController@index');
  Route::get('configuracoes/mensagens/ler/{id}', 'MensagensController@ler');
  Route::get('configuracoes/mensagens/excluir/{id}', 'MensagensController@destroy');
+
+
+ Route::get('/saques/pendentes', 'AdminController@getPendentes');
+ Route::get('/saques/aprovados', 'AdminController@getAprovados');
+ Route::get('/saques/recusados', 'AdminController@getRecusados');
+ Route::get('/saques/aprovar/{id}', 'AdminController@aprovaSaque');
+ Route::get('/saques/recusar/{id}', 'AdminController@recusarSaque');
 });
 
 //Doacoes 

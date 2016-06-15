@@ -21,6 +21,10 @@ class Historias extends Model
     	return $this->hasMany('App\Doacoes', 'idHistoria');
     }
     
+    public function saques() {
+        return $this->hasMany('App\Saques', 'idHistoria');
+    }
+    
     public function comentarios() {
     	return $this->hasMany('App\Comentarios', 'idHistoria', 'id');
     }
