@@ -5825,6 +5825,10 @@ button.close {
     width: 600px;
     margin: 30px auto;
   }
+
+  .div-center {
+    text-align: center;
+  }
   .modal-content {
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
@@ -5836,6 +5840,10 @@ button.close {
 @media (min-width: 992px) {
   .modal-lg {
     width: 900px;
+  }
+
+  .div-center {
+    text-align: left;
   }
 }
 .tooltip {
@@ -6878,3 +6886,21 @@ a.list-group-item-danger.active:focus {
 /*
   END HISTORIA
 */
+
+
+
+@media (min-width: 768px) {
+  .div-center {
+    text-align: center;
+  }
+
+}
+@media (min-width: 992px) {
+  .div-center {
+    text-align: left !important;
+  }
+}
+
+.div-center {
+  text-align: center;
+}

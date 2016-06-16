@@ -19,11 +19,11 @@
 		<div class="row">
 			<div class="menu-horizontal col-md-offset-2 col-xs-offset-2  col-sm-offset-2  col-lg-offset-2 col-md-8 col-xs-8 col-sm-8 col-lg-8">
 				<ul class="nav nav-tabs nav-justified">
-					<li role="presentation"><a href="/configuracoes/perfil">Perfil</a></li>
+					<li role="presentation"><a href="/configuracoes/perfil"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
 					@if (Auth::user()->tipo == 2)
-					<li role="presentation"><a href="/configuracoes/historia">História</a></li>
+					<li role="presentation"><a href="/configuracoes/historia"><span class="glyphicon glyphicon-comment"></span> História</a></li>
 					@endif
-					<li role="presentation" class="active"><a href="/configuracoes/mensagens">Mensagens <span class="badge">{{$quantidadeMsg}}</span></a></li>
+					<li role="presentation" class="active"><a href="/configuracoes/mensagens"><span class="glyphicon glyphicon-envelope"></span> Mensagens <span class="badge">{{$quantidadeMsg}}</span></a></li>
 				</ul>
 			</div>
 			

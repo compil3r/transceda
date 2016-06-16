@@ -32,9 +32,14 @@ class HistoriasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {  
+          if (!Auth::guest()) {
+            $mensagensT = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        } else {
+            $mensagensT = 0;
+        }
         
-            return view('transcenda.historias.cadastrar', array('estados'=>Estados::all()));
+            return view('transcenda.historias.cadastrar', array('estados'=>Estados::all(), 'mensagensT'=>$mensagensT));
       
     }
 
@@ -92,6 +97,13 @@ class HistoriasController extends Controller
 
 
     public function configHistoria() {
+
+          if (!Auth::guest()) {
+            $mensagensT = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        } else {
+            $mensagensT = 0;
+        }
+
         $historia = Historias::where('idUser', Auth::user()->id)->get();
         foreach ($historia as $historias) {
         $doacoes = Doacoes::where('idHistoria', $historias->id)->get();
@@ -107,7 +119,7 @@ class HistoriasController extends Controller
 
 
         return view('configuracoes.historia', array('historia' => $historia, 'doacoes' => $doacoes, 'quantidadeMsg' => $quantidadeMsg,
-            'saques' => $saques, 'saquesRecebidos' => $saquesRecebidos, 'saquesAtendidos' => $saquesAtendidos, 'saquesAtendidosTotal' => $saquesAtendidosTotal, 'saquesRecusados' => $saquesRecusados));
+            'saques' => $saques, 'saquesRecebidos' => $saquesRecebidos, 'saquesAtendidos' => $saquesAtendidos, 'saquesAtendidosTotal' => $saquesAtendidosTotal, 'saquesRecusados' => $saquesRecusados, 'mensagensT'=>$mensagensT));
     }
 
  
@@ -125,10 +137,15 @@ class HistoriasController extends Controller
      */
     public function show($id)
     {
+          if (!Auth::guest()) {
+            $mensagensT = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        } else {
+            $mensagensT = 0;
+        }
 
         $comentarios = Comentarios::where('idHistoria', $id)->orderBy('created_at', 'asc')->get();
 
-        return view('transcenda.historias.historia', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->orderBy('created_at', 'dsc')->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id), 'falta' => $this->quantoFalta($id),'comentarios' => $comentarios, 'grafico' => $this->getDoacoes($id)));
+        return view('transcenda.historias.historia', array('historia'=>Historias::find($id), 'doacoes'=>Doacoes::where('idHistoria', $id)->orderBy('created_at', 'dsc')->get(), 'total' => Doacoes::where('idHistoria', $id)->sum('valor'), 'porcentagem' => $this->porcentagem($id), 'falta' => $this->quantoFalta($id),'comentarios' => $comentarios, 'grafico' => $this->getDoacoes($id), 'mensagensT' => $mensagensT));
     }
 
     private function porcentagem($id) {

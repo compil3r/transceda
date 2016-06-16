@@ -19,17 +19,17 @@
 		<div class="row">
 			<div class="menu-horizontal col-md-offset-2 col-xs-offset-2  col-sm-offset-2  col-lg-offset-2 col-md-8 col-xs-8 col-sm-8 col-lg-8">
 			<ul class="nav nav-tabs nav-justified">
-				<li role="presentation" class="active"><a href="#">Perfil</a></li>
+				<li role="presentation" class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> Perfil</a></li>
 				@if (Auth::user()->tipo == 2)
-					<li role="presentation"><a href="/configuracoes/historia">História</a></li>
+					<li role="presentation"><a href="/configuracoes/historia"><span class="glyphicon glyphicon-comment"></span> História</a></li>
 				@endif
-				<li role="presentation" class=""><a href="/configuracoes/mensagens">Mensagens <span class="badge">{{$quantidadeMsg}}</span></a></li>
+				<li role="presentation" class=""><a href="/configuracoes/mensagens"><span class="glyphicon glyphicon-envelope"></span> Mensagens <span class="badge">{{$quantidadeMsg}}</span></a></li>
 			</ul>
 			</div>
 			@include ('partials.modalCortarImagem')
 			<br>
 
-			<div class="col-md-offset-2 col-lg-offset-2 col-sm-offset-2 col-xs-offset-2 col-md-4 col-lg-4 col-sm-4 col-xs-4 col-sm-6 portfolio-item">
+			<div style="display:flex;" class="col-md-offset-2 col-lg-offset-2 col-md-4 col-lg-4 col-sm-12 col-xs-12 col-sm-12 portfolio-item">
 				<a id="fotoDePerfil" class="portfolio-link">
 					<div class="caption caption-profile">
 						<div class="caption-content">
@@ -53,7 +53,7 @@
                     <input type="file" id="files" name="imagem" onchange="fotoHistoria()" style="display:none;" />
                 </form>
 				</div>
-				<div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+				<div class="col-md-6 col-lg-6 col-sm-12 col-xs-12 div-center">
 					Nome: {{Auth::user()->name}}
 					<br>
 					Nascimento: {{Auth::user()->aniversario}}

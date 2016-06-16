@@ -95,12 +95,17 @@ class AuthController extends Controller
     }
 
     public function configPerfil() {
+          if (!Auth::guest()) {
+            $mensagensT = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        } else {
+            $mensagensT = 0;
+        }
         $historia = Historias::where('idUser', Auth::user()->id)->get();
         $doacoes = Doacoes::where('idHistoria', $historia->get('id'))->get();
         $estados = Estados::all();
         $cidades = Cidades::all();
         $quantidadeMsg = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
-        return view('configuracoes.perfil', array('historia' => $historia, 'estados' => $estados, 'cidades' => $cidades, 'doacoes' => $doacoes, 'quantidadeMsg' => $quantidadeMsg));
+        return view('configuracoes.perfil', array('historia' => $historia, 'estados' => $estados, 'cidades' => $cidades, 'doacoes' => $doacoes, 'quantidadeMsg' => $quantidadeMsg, 'mensagensT' => $mensagensT));
     }
 
     public function updatePicture(Request $request) {

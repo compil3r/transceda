@@ -20,11 +20,18 @@ class MensagensController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
+
+          if (!Auth::guest()) {
+            $mensagensT = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        } else {
+            $mensagensT = 0;
+        }
         $quantidadeMsg = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
         $mensagens = Mensagens::where('idRecebedor', Auth::user()->id)->orderBy('created_at', 'asc')->get();
 
-        return view('configuracoes.mensagens', array('mensagens' => $mensagens, 'quantidadeMsg' => $quantidadeMsg));
+        return view('configuracoes.mensagens', array('mensagens' => $mensagens, 'quantidadeMsg' => $quantidadeMsg, 'mensagensT' => $mensagensT));
     }
 
     /**

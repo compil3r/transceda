@@ -7,6 +7,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Historias;
 use App\User;
+use App\Estados;
+use App\Doacoes;
+use App\Comentarios;
+use App\Mensagens;
+use App\Saques;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 class TranscedaController extends Controller
 {
     /**
@@ -16,7 +28,12 @@ class TranscedaController extends Controller
      */
     public function index()
     {
-        return view('transcenda.index', array('historia'=>Historias::all()));
+        if (!Auth::guest()) {
+            $mensagensT = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        } else {
+            $mensagensT = 0;
+        }
+        return view('transcenda.index', array('historia'=>Historias::all(), 'mensagensT' => $mensagensT));
     }
 
     /**
