@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function()
  Route::get('/saques/recusar/{id}', 'AdminController@recusarSaque');
 });
 
+Route::get('/historias', 'HistoriasController@listaHistorias');
 //Doacoes 
 Route::post('/configuracoes/sacar', 'DoacoesController@sacar');
 

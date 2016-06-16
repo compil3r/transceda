@@ -76,7 +76,7 @@
 <p class="descricao">{{$historia->descricao}}</p>
 </div>
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-<h4 class='center'>Andamento das doacoes</h4>
+<h4 class='center'>Andamento das Doações</h4>
 @if ($grafico == null)
 
 <div class="well"><h4 align="center">Ainda não houveram doações =(</h4></div>

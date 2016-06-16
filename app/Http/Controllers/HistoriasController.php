@@ -124,7 +124,18 @@ class HistoriasController extends Controller
 
  
 
-    public function imagem() {
+    public function listaHistorias() {  
+
+       if (!Auth::guest()) {
+            $mensagensT = Mensagens::where('idRecebedor', Auth::user()->id)->where('status', 1)->count();
+        } else {
+            $mensagensT = 0;
+        }
+
+        $user = User::all();
+
+        $historias = \DB::table('historias')->paginate(10);
+        return view('transcenda.historias.index', array('historias' => $historias, 'mensagensT' => $mensagensT, 'users' => $user ));
 
     
     }

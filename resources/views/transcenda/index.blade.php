@@ -29,7 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 portfolio-item">
-                    <a  data-toggle="modal" data-target="#modalDoar" class="portfolio-link">
+                    <a  href="/historias" class="portfolio-link">
                         <div class="caption">
                             <div class="caption-content">
                                 <h2 class="nexa-bold">DOAR</h2>
